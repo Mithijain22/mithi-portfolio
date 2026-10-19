@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<script type="module" src="/src/site/site.ts"></script>
+</head>
+<body class="site">
+<div class="grain" aria-hidden="true"></div>
+{{> nav}}
+<main>
+  <h1 class="giant">{{name}}</h1>
+  <section><p>{{about}}</p></section>
+  <section><h2>HOW THIS WAS BUILT</h2><p>{{aiBuildNote}}</p></section>
+  <section id="contact"><h2>CONTACT</h2><a class="big-link" href="mailto:{{email}}">{{email}}</a></section>
+</main>
+{{> footer}}
+</body>
+</html>

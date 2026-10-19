@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<script type="module" src="/src/site/site.ts"></script>
+</head>
+<body class="site">
+<div class="grain" aria-hidden="true"></div>
+{{> nav}}
+<main>
+  <h1 class="giant">WORK</h1>
+  <ol class="project-list">
+    {{{projectRows}}}
+  </ol>
+</main>
+{{> footer}}
+</body>
+</html>

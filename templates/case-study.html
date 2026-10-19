@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+{{> head}}
+<script type="module" src="/src/site/site.ts"></script>
+</head>
+<body class="site">
+<div class="grain" aria-hidden="true"></div>
+{{> nav}}
+<main>
+  <header class="cs-header">
+    <p class="index">{{index}}</p>
+    <h1 class="giant">{{projectTitle}}</h1>
+    <p class="script">{{annotation}}</p>
+  </header>
+  <dl class="meta-row">
+    <div><dt>ROLE</dt><dd>{{role}}</dd></div>
+    <div><dt>TIMELINE</dt><dd>{{timeline}}</dd></div>
+    <div><dt>TOOLS</dt><dd>{{tools}}</dd></div>
+    <div><dt>OUTCOME</dt><dd>{{outcome}}</dd></div>
+  </dl>
+  {{{sections}}}
+  <nav class="next-block" aria-label="Case study navigation">
+    <a href="/work/{{nextSlug}}">NEXT PROJECT: {{nextTitle}}</a>
+    <a href="/work">ALL WORK</a>
+  </nav>
+</main>
+{{> footer}}
+</body>
+</html>

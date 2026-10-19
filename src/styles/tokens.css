@@ -1,0 +1,21 @@
+:root {
+  /* base */
+  --black: #0A0A0A;
+  --cream: #FCE3D5;
+  --orange-red: #F2502C;
+
+  /* colorways: flat accent triples */
+  --a-1: #12B5C4; --a-2: #FF7A1A; --a-3: #F2C6E0;
+  --b-1: #F5D90A; --b-2: #3FA66B; --b-3: #D9301E;
+  --c-1: #2B4FD8; --c-2: #E0218A; --c-3: #FCE3D5;
+
+  /* type */
+  --font-display: 'Anton', 'Impact', 'Haettenschweiler', 'Arial Narrow Bold', sans-serif;
+  --font-script: 'Pinyon Script', 'Snell Roundhand', 'Brush Script MT', cursive;
+  --font-body: 'DM Sans', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --font-mono: 'DM Mono', ui-monospace, 'SF Mono', Consolas, monospace;
+
+  /* hard offset shadow only: no blur, ever */
+  --shadow-hard: 6px 6px 0 var(--black);
+  --line: 1px solid rgba(252, 227, 213, 0.25);
+}

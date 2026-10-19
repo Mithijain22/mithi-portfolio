@@ -1,0 +1,37 @@
+*, *::before, *::after { box-sizing: border-box; }
+html { background: var(--black); color: var(--cream); }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--black);
+  color: var(--cream);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.5;
+}
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--orange-red); outline-offset: 3px; }
+
+/* film grain: oversized layer shifted with transform (cheaper than
+   animating background-position), 4 jumps per second */
+.grain {
+  position: fixed;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: url('/grain.png') repeat;
+  background-size: 256px 256px;
+  mix-blend-mode: overlay;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain-shift 1s steps(1, end) infinite;
+}
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  25%  { transform: translate(-3%, 2%); }
+  50%  { transform: translate(2%, -3%); }
+  75%  { transform: translate(-2%, -1%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .grain { animation: none; }
+}
