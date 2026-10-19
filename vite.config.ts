@@ -1,4 +1,5 @@
-import { defineConfig } from 'vite';
+import { defineConfig, type Plugin } from 'vite';
+import { existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { PROJECTS } from './src/content.ts';
 
@@ -14,7 +15,26 @@ const input: Record<string, string> = {
 };
 for (const p of PROJECTS) input[`work-${p.slug}`] = r(`work/${p.slug}/index.html`);
 
+// Clean URLs for dev and preview: /work -> /work/index.html (no trailing slash needed).
+function cleanUrls(): Plugin {
+  const make = (root: string) =>
+    (req: { url?: string }, _res: unknown, next: () => void) => {
+      const [path, query] = (req.url ?? '/').split('?');
+      const trimmed = path.replace(/\/+$/, '');
+      if (trimmed && !/\.[a-z0-9]+$/i.test(trimmed) && existsSync(resolve(root, '.' + trimmed, 'index.html'))) {
+        req.url = `${trimmed}/index.html${query ? '?' + query : ''}`;
+      }
+      next();
+    };
+  return {
+    name: 'clean-urls',
+    configureServer(server) { server.middlewares.use(make(server.config.root)); },
+    configurePreviewServer(server) { server.middlewares.use(make(resolve(server.config.root, server.config.build.outDir))); },
+  };
+}
+
 export default defineConfig({
   appType: 'mpa',
+  plugins: [cleanUrls()],
   build: { rollupOptions: { input } },
 });

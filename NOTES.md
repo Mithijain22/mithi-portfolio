@@ -11,7 +11,5 @@ Decisions and deviations from the spec.
   `transform` on an oversized layer rather than animating `background-position` (cheaper).
 - **tsx** and **@types/node** added as dev dependencies (needed to run `build-pages.ts`
   and type-check it).
-- **Clean URLs:** links use `/work` and `/about` without a trailing slash. Vite dev and
-  preview run with `appType: 'mpa'` and should resolve them; verify on first run.
-  A static host without clean-URL support would need trailing slashes.
+- **Clean URLs:** Vite dev returned 404 for /work without a trailing slash, so vite.config.ts has a small `cleanUrls` plugin (dev + preview) that maps /work to /work/index.html.
 - **Lips art** (later phase): original lips sticker, not a copy of any existing logo.
