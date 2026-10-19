@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <path id="mouth" d="M18 92C38 52 82 44 100 70C118 44 162 52 182 92C164 132 132 142 100 142C68 142 36 132 18 92Z"/>
+    <path id="tongue" d="M70 112C66 152 82 184 100 186C118 184 134 152 130 112C120 122 108 124 100 124C92 124 80 122 70 112Z"/>
+  </defs>
+  <!-- cream sticker border -->
+  <g fill="#FCE3D5" stroke="#FCE3D5" stroke-width="16" stroke-linejoin="round">
+    <use href="#mouth"/><use href="#tongue"/>
+  </g>
+  <!-- tongue -->
+  <use href="#tongue" fill="#F2502C" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round"/>
+  <path d="M100 126V172" stroke="#BD2E0B" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <path d="M83 134C80 150 86 164 93 171" stroke="#FCE3D5" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <!-- lips -->
+  <use href="#mouth" fill="#F2502C" stroke="#0A0A0A" stroke-width="5" stroke-linejoin="round"/>
+  <!-- open mouth -->
+  <path d="M38 92C60 76 86 80 100 90C114 80 140 76 162 92C146 114 126 120 100 120C74 120 54 114 38 92Z" fill="#0A0A0A"/>
+  <!-- teeth -->
+  <path d="M52 90C70 82 88 86 100 93C112 86 130 82 148 90C138 100 120 103 100 103C80 103 62 100 52 90Z" fill="#FCE3D5" stroke="#0A0A0A" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M76 88V100M88 92V102M112 92V102M124 88V100" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- lip shine -->
+  <path d="M44 84C56 66 74 60 90 66" stroke="#FCE3D5" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <path d="M156 84C146 70 134 64 124 64" stroke="#FCE3D5" stroke-width="5" stroke-linecap="round" fill="none"/>
+</svg>

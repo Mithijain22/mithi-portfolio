@@ -20,11 +20,18 @@ export const SPRITE = `<svg width="0" height="0" style="position:absolute" aria-
 <symbol id="obj-ticket" viewBox="0 0 64 64"><path d="M6 18h52v9a5 5 0 0 0 0 10v9H6v-9a5 5 0 0 0 0-10z" style="fill:var(--o3);${S}"/><path d="M44 18v28" style="fill:none;stroke-dasharray:3 4;${S}"/><rect x="14" y="26" width="20" height="12" style="fill:var(--o1);${S}"/></symbol>
 <symbol id="obj-cursor" viewBox="0 0 64 64"><path d="M16 8v42l10-10 7 16 7-3-7-15h14z" style="fill:var(--o1);${S}"/></symbol>
 <symbol id="art-dots" viewBox="0 0 160 96" preserveAspectRatio="xMidYMid slice"><g style="fill:var(--o2)">${dots()}</g></symbol>
-<symbol id="lips" viewBox="0 0 64 64">
-<g style="stroke:#FCE3D5;stroke-width:6;stroke-linejoin:round;fill:#F2502C">
-<path d="M6 34C16 16 27 14 32 23c5-9 16-7 26 11-9-4-19-4-26-2-7-2-17-2-26 2z"/>
-<path d="M6 34c10-2 19-2 26 0 7-2 16-2 26 0-6 16-16 21-26 21S12 50 6 34z"/></g>
-<path d="M6 34c10-2 19-2 26 0 7-2 16-2 26 0" style="fill:none;stroke:#0A0A0A;stroke-width:3;stroke-linecap:round"/>
+<symbol id="lips" viewBox="0 0 200 200">
+<path id="lips-mouth" d="M18 92C38 52 82 44 100 70C118 44 162 52 182 92C164 132 132 142 100 142C68 142 36 132 18 92Z" style="fill:#FCE3D5;stroke:#FCE3D5;stroke-width:16;stroke-linejoin:round"/>
+<path id="lips-tongue" d="M70 112C66 152 82 184 100 186C118 184 134 152 130 112C120 122 108 124 100 124C92 124 80 122 70 112Z" style="fill:#FCE3D5;stroke:#FCE3D5;stroke-width:16;stroke-linejoin:round"/>
+<use href="#lips-tongue" style="fill:#F2502C;stroke:#0A0A0A;stroke-width:5;stroke-linejoin:round"/>
+<path d="M100 126V172" style="stroke:#BD2E0B;stroke-width:5;stroke-linecap:round;fill:none"/>
+<path d="M83 134C80 150 86 164 93 171" style="stroke:#FCE3D5;stroke-width:6;stroke-linecap:round;fill:none"/>
+<use href="#lips-mouth" style="fill:#F2502C;stroke:#0A0A0A;stroke-width:5;stroke-linejoin:round"/>
+<path d="M38 92C60 76 86 80 100 90C114 80 140 76 162 92C146 114 126 120 100 120C74 120 54 114 38 92Z" style="fill:#0A0A0A"/>
+<path d="M52 90C70 82 88 86 100 93C112 86 130 82 148 90C138 100 120 103 100 103C80 103 62 100 52 90Z" style="fill:#FCE3D5;stroke:#0A0A0A;stroke-width:3;stroke-linejoin:round"/>
+<path d="M76 88V100M88 92V102M112 92V102M124 88V100" style="stroke:#0A0A0A;stroke-width:2.5;stroke-linecap:round"/>
+<path d="M44 84C56 66 74 60 90 66" style="stroke:#FCE3D5;stroke-width:6;stroke-linecap:round;fill:none"/>
+<path d="M156 84C146 70 134 64 124 64" style="stroke:#FCE3D5;stroke-width:5;stroke-linecap:round;fill:none"/>
 </symbol>
 </defs></svg>`;
 
@@ -35,4 +42,4 @@ export const obj = (id: string, cw: string) =>
   `<svg class="obj cw-${cw}" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#obj-${id}"/></svg>`;
 
 export const lips = (cls = 'lips') =>
-  `<svg class="${cls}" viewBox="0 0 64 64" aria-hidden="true" focusable="false"><use href="#lips"/></svg>`;
+  `<svg class="${cls}" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><use href="#lips"/></svg>`;
