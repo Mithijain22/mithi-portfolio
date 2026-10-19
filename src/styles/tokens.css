@@ -19,3 +19,6 @@
   --shadow-hard: 6px 6px 0 var(--black);
   --line: 1px solid rgba(252, 227, 213, 0.25);
 }
+
+/* darker orange-red for text on cream (meets 4.5:1) */
+:root { --orange-text: #BD2E0B; }

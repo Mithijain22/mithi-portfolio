@@ -7,11 +7,33 @@
 <body class="site">
 <div class="grain" aria-hidden="true"></div>
 {{> nav}}
-<main>
-  <h1 class="giant">{{name}}</h1>
-  <section><p>{{about}}</p></section>
-  <section><h2>HOW THIS WAS BUILT</h2><p>{{aiBuildNote}}</p></section>
-  <section id="contact"><h2>CONTACT</h2><a class="big-link" href="mailto:{{email}}">{{email}}</a></section>
+<main id="main">
+  <header class="about-head">
+    <h1 class="giant">{{name}}</h1>
+    <p class="role-line">{{tagline}}</p>
+  </header>
+  <section class="about-grid">
+    <div class="about-text"><p>{{about}}</p></div>
+    <div class="portrait-box">{{{portrait}}}</div>
+  </section>
+  <section class="built">
+    <h2>HOW THIS WAS BUILT</h2>
+    <p>{{aiBuildNote}}</p>
+    <h3>TOOLS</h3>
+    <ul class="chips">{{{tools}}}</ul>
+    <h3>THREE BIGGEST PROBLEMS</h3>
+    <ol class="problems">{{{problems}}}</ol>
+    {{{repoLink}}}
+  </section>
+  <section id="contact" class="contact">
+    <h2>CONTACT</h2>
+    <a class="big-link" href="mailto:{{email}}">{{email}}</a>
+    <ul class="footer-links dark">
+      <li><a href="{{linkedin}}">LinkedIn</a></li>
+      <li><a href="{{resume}}">Resume</a></li>
+      {{{githubItem}}}
+    </ul>
+  </section>
 </main>
 {{> footer}}
 </body>

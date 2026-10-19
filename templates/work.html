@@ -7,8 +7,12 @@
 <body class="site">
 <div class="grain" aria-hidden="true"></div>
 {{> nav}}
-<main>
-  <h1 class="giant">WORK</h1>
+<main id="main">
+  <div class="work-head">
+    <h1 class="giant">WORK</h1>
+    <span class="script work-script" aria-hidden="true">selected</span>
+  </div>
+  <div class="marquee" aria-hidden="true"><div class="marquee-track">{{{marquee}}}{{{marquee}}}</div></div>
   <ol class="project-list">
     {{{projectRows}}}
   </ol>

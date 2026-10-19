@@ -94,6 +94,14 @@ export const ABOUT =
 export const AI_BUILD_NOTE =
   'DUMMY AI BUILD NOTE. Replace with eighty to one hundred twenty words on how this site was built with AI, what worked and what broke.';
 
+export const BUILD_TOOLS = ['Claude', 'Vite', 'TypeScript', 'GSAP', 'Howler.js'];
+
+export const BUILD_PROBLEMS = [
+  'DUMMY PROBLEM ONE. What broke while building, and how you fixed it.',
+  'DUMMY PROBLEM TWO. What broke while building, and how you fixed it.',
+  'DUMMY PROBLEM THREE. What broke while building, and how you fixed it.',
+];
+
 export const LINKS = {
   email: 'hello@example.com',
   linkedin: 'https://www.linkedin.com/in/your-name',

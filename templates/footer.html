@@ -1,10 +1,13 @@
 <footer class="site-footer">
-  <p class="script">See you</p>
-  <ul class="footer-links">
-    <li><a href="mailto:{{email}}">{{email}}</a></li>
-    <li><a href="{{linkedin}}">LinkedIn</a></li>
-    <li><a href="{{resume}}">Resume</a></li>
-    {{{githubItem}}}
-  </ul>
-  <a class="play-again" href="/">PLAY AGAIN</a>
+  <div class="wall-3d" aria-hidden="true"><div class="plane">{{{wall}}}</div></div>
+  <div class="footer-inner">
+    <p class="script">See you</p>
+    <ul class="footer-links">
+      <li><a href="mailto:{{email}}">{{email}}</a></li>
+      <li><a href="{{linkedin}}">LinkedIn</a></li>
+      <li><a href="{{resume}}">Resume</a></li>
+      {{{githubItem}}}
+    </ul>
+    <a class="play-again" href="/" data-play>PLAY AGAIN</a>
+  </div>
 </footer>

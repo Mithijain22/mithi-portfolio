@@ -7,11 +7,17 @@
 <body class="site">
 <div class="grain" aria-hidden="true"></div>
 {{> nav}}
-<main>
-  <header class="cs-header">
+<main id="main">
+  <header class="cs-header cw-{{cw}}">
     <p class="index">{{index}}</p>
-    <h1 class="giant">{{projectTitle}}</h1>
-    <p class="script">{{annotation}}</p>
+    <div class="cs-hero">
+      <h1 class="cs-title">{{projectTitle}}</h1>
+      <div class="cs-image-wrap">
+        <div class="cs-title cs-flip" aria-hidden="true">{{projectTitle}}</div>
+        {{{art}}}
+      </div>
+    </div>
+    <p class="script annotation">{{annotation}}</p>
   </header>
   <dl class="meta-row">
     <div><dt>ROLE</dt><dd>{{role}}</dd></div>
@@ -21,8 +27,8 @@
   </dl>
   {{{sections}}}
   <nav class="next-block" aria-label="Case study navigation">
-    <a href="/work/{{nextSlug}}">NEXT PROJECT: {{nextTitle}}</a>
-    <a href="/work">ALL WORK</a>
+    <a class="next-link" href="/work/{{nextSlug}}"><span>NEXT PROJECT</span><strong>{{nextTitle}}</strong></a>
+    <a class="all-link" href="/work">ALL WORK</a>
   </nav>
 </main>
 {{> footer}}
