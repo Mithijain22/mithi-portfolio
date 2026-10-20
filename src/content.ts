@@ -108,3 +108,14 @@ export const LINKS = {
   resume: '/resume.pdf',
   github: '',
 };
+
+// Hero: one image per letter of NAME, in order (shown on hover).
+export const HERO_IMAGES = ['/img/m.jpg', '/img/i1.jpg', '/img/t.jpg', '/img/h.jpg', '/img/i2.jpg'];
+export const HERO_SCRIPT = 'Hello';
+
+// Small corner text on the loading screen (placeholders).
+export const LOADER_TEXT = {
+  tl: ['Year: 2026', 'Dept. of Product'],
+  tr: ['PORTFOLIO', 'CASE STUDIES'],
+  bl: ['EXHIBIT', 'COLLECTION'],
+};

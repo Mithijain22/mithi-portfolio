@@ -4,6 +4,8 @@ import '../styles/tokens.css';
 import '../styles/base.css';
 import '../styles/site.css';
 import { gsap } from 'gsap';
+import { initBananaCursor } from '../fx/cursor.ts';
+initBananaCursor();
 
 const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

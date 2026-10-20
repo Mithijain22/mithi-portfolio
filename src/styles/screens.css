@@ -1,1 +1,43 @@
-/* Game screens (loader, hero, game, wall, poster). Built from Phase 2 on. */
+/* Game page screens: loader, hero. */
+html, body { overflow: hidden; height: 100%; }
+html.banana-on, html.banana-on * { cursor: none !important; }
+.banana { position: fixed; left: 0; top: 0; z-index: 10001; pointer-events: none; transform-origin: 9px 4px; opacity: 0; }
+.toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 500; background: var(--cream); color: var(--black); font-family: var(--font-display); letter-spacing: .05em; padding: 12px 20px; box-shadow: 4px 4px 0 var(--orange-red); }
+
+.skip { position: fixed; top: 20px; right: 24px; z-index: 400; font-family: var(--font-display); font-size: 16px; letter-spacing: .05em; text-decoration: none; color: var(--cream); border: 1px solid var(--cream); padding: 10px 16px; min-height: 44px; display: inline-flex; align-items: center; background: var(--black); }
+.skip:hover { background: var(--cream); color: var(--black); }
+
+.loader { position: fixed; inset: 0; z-index: 200; background: var(--black); color: var(--cream); font-size: 12px; }
+.lt { position: absolute; line-height: 1.5; }
+.tl { top: 28px; left: 28px; } .tr { top: 80px; right: 28px; text-align: right; } .bl { bottom: 28px; left: 28px; }
+.lbar { position: absolute; left: 50%; bottom: 40px; width: min(380px, 40vw); height: 1px; background: rgba(252,227,213,.25); transform: translateX(-50%); }
+.lbar i { display: block; height: 100%; width: 0; background: var(--cream); }
+.lcount { position: absolute; right: 28px; bottom: 20px; display: flex; align-items: baseline; gap: 12px; font-family: var(--font-display); text-transform: uppercase; }
+.lcount span, .lcount em { font-size: clamp(22px, 3vw, 40px); font-style: normal; }
+.lcount b { font-weight: 400; font-size: clamp(56px, 8vw, 120px); line-height: 1; min-width: 2ch; text-align: right; }
+.gl { position: absolute; background: var(--cream); opacity: 0; }
+
+.hero { position: fixed; inset: 0; background: var(--black); color: var(--cream); }
+.hnav { position: absolute; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; z-index: 5; font-family: var(--font-display); font-size: 20px; letter-spacing: .04em; }
+.hnav .grp { display: flex; gap: 28px; } .hnav .grp.r { margin-right: 180px; }
+.hnav a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; border-bottom: 2px solid transparent; }
+.hnav a:hover { border-color: var(--orange-red); }
+.hmark { position: absolute; left: 50%; transform: translateX(-50%); font-size: 26px; }
+.hname { position: absolute; left: 0; right: 0; top: 54%; transform: translateY(-50%); margin: 0; display: flex; justify-content: center; font-family: var(--font-display); font-weight: 400; font-size: min(38vw, 58vh); line-height: .9; letter-spacing: -.01em; }
+.hname > span { display: flex; }
+.letter { display: inline-block; transform: scaleY(1.15); color: var(--cream); background-size: cover; background-position: 50% 30%; -webkit-background-clip: text; background-clip: text; user-select: none; }
+.letter:hover, .letter.on { color: transparent; background-image: var(--img); }
+.hscript { position: absolute; left: 44%; top: 17%; z-index: 4; font-family: var(--font-script); color: var(--orange-red); font-size: clamp(48px, 9vw, 150px); transform: rotate(-6deg); pointer-events: none; }
+.hrows { position: absolute; left: 0; right: 0; bottom: 96px; display: flex; justify-content: space-around; font-family: var(--font-display); font-size: clamp(14px, 1.6vw, 26px); opacity: .7; }
+.htag { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); margin: 0; text-align: center; font-size: 16px; }
+.hint { position: absolute; right: 28px; bottom: 36px; margin: 0; font-family: var(--font-mono); font-size: 12px; }
+.tube { position: absolute; left: 24px; bottom: 20px; width: clamp(150px, 17vw, 250px); background: none; border: 0; padding: 0; z-index: 5; }
+.tube svg { width: 100%; height: auto; display: block; }
+.tube:hover svg, .tube:focus-visible svg { animation: wobble .5s; }
+@keyframes wobble { 25% { transform: rotate(-4deg); } 50% { transform: rotate(3deg); } 75% { transform: rotate(-2deg); } }
+@media (max-width: 767px) {
+  .hnav .grp { gap: 12px; font-size: 16px; } .hnav .grp.r { margin-right: 0; } .hmark { display: none; }
+  .hname { font-size: 40vw; top: 50%; } .htag { bottom: 120px; width: 80%; } .hint { bottom: 80px; right: 50%; transform: translateX(50%); }
+  .tube { bottom: 12px; width: 150px; } .skip { top: 64px; }
+}
+@media (prefers-reduced-motion: reduce) { .tube:hover svg { animation: none; } }
