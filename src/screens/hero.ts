@@ -1,4 +1,5 @@
 import { gsap } from 'gsap';
+import { startWall } from './wall.ts';
 import { NAME, TAGLINE, HERO_IMAGES, HERO_SCRIPT } from '../content.ts';
 
 const TUBE = `<svg viewBox="0 0 260 90" aria-hidden="true"><path d="M12 16L180 26V64L12 74Z" fill="#CFD3D6" stroke="#0A0A0A" stroke-width="3" stroke-linejoin="round"/><path d="M12 16L3 22V68L12 74" fill="#9EA3A8" stroke="#0A0A0A" stroke-width="3" stroke-linejoin="round"/><rect x="180" y="28" width="62" height="34" fill="#F2502C" stroke="#0A0A0A" stroke-width="3"/><path d="M192 28V62M204 28V62M216 28V62M228 28V62" stroke="#0A0A0A" stroke-width="2"/><text x="26" y="58" font-family="Anton,Impact,sans-serif" font-size="34" fill="#BD2E0B">PLAY</text><path d="M104 38V62M108 38V62M113 38V62M117 38V62M122 38V62M127 38V62M131 38V62" stroke="#0A0A0A" stroke-width="2"/></svg>`;
@@ -30,7 +31,7 @@ export function showHero() {
     l.addEventListener('mouseenter', () => hero.querySelector('.hint')?.remove());
   });
   hero.querySelectorAll('[data-play]').forEach((b) => b.addEventListener('click', (e) => {
-    e.preventDefault(); toast('THE GAME IS COMING NEXT');
+    e.preventDefault(); startWall();
   }));
   if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
     gsap.from('.letter', { opacity: 0, scaleY: 0.5, duration: 0.5, stagger: 0.08, ease: 'steps(4)' });
