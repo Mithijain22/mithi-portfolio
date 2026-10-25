@@ -20,6 +20,8 @@ export function initBananaCursor() {
     rot(gsap.utils.clamp(-25, 25, (e.clientX - lastX) * 1.2));
     lastX = e.clientX;
   });
+  // no banana inside the TV screen: it would sit on top of the tiles
+  document.addEventListener('mouseover', (e) => { el.style.visibility = (e.target as HTMLElement).closest?.('.tvscreen') ? 'hidden' : 'visible'; });
   document.addEventListener('mouseleave', () => { el.style.opacity = '0'; });
   window.addEventListener('mousedown', () => gsap.to(el, { scale: 0.8, duration: 0.08 }));
   window.addEventListener('mouseup', () => gsap.to(el, { scale: 1, duration: 0.15 }));
