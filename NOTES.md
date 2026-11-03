@@ -13,3 +13,9 @@ Decisions and deviations from the spec.
   and type-check it).
 - **Clean URLs:** Vite dev returned 404 for /work without a trailing slash, so vite.config.ts has a small `cleanUrls` plugin (dev + preview) that maps /work to /work/index.html.
 - **Lips art** (later phase): original lips sticker, not a copy of any existing logo.
+- **Game replaced.** The find-the-odd-one Wall was dropped. A fruit-merge game is being built separately from
+  `fruit-merge-build-spec.md` and will be integrated later. `src/game/slot.ts` is a stand-in with a test button;
+  the real game replaces it and calls the same preview card (`showPoster`) per unlock.
+- **Pages removed:** no `/work` index and no `/about` page. Work is a section on the home page (`#work`);
+  each project keeps a case study page at `/work/<slug>`, or links to its GitHub repo if `repo` is set in `content.ts`.
+- **Work panel colours:** teal `#12B5C4`, yellow `#F5D90A`, hot pink `#EE3E9C`.

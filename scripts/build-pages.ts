@@ -2,10 +2,7 @@
 // src/content.ts + /templates. Runs as predev and prebuild.
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import {
-  NAME, TAGLINE, PORTRAIT, ABOUT, AI_BUILD_NOTE, BUILD_TOOLS, BUILD_PROBLEMS,
-  LINKS, PROJECTS, SITE_URL,
-} from '../src/content.ts';
+import { NAME, LINKS, PROJECTS, SITE_URL } from '../src/content.ts';
 import { SPRITE, OBJECT_IDS, CW, obj, lips } from './objects.ts';
 
 const ROOT = resolve(import.meta.dirname, '..');
@@ -37,11 +34,8 @@ const wall = (() => {
   return h;
 })();
 
-// marquee strip of colorway objects (one set; template repeats it for a seamless loop)
-const marquee = Array.from({ length: 12 }, (_, i) =>
-  obj(OBJECT_IDS[i % OBJECT_IDS.length], CW[i % CW.length])).join('');
 
-function shared(path: string, title: string, description: string, current: 'work' | 'about' | ''): Vars {
+function shared(path: string, title: string, description: string): Vars {
   const url = site ? `${site}${path}` : '';
   return {
     title,
@@ -51,12 +45,9 @@ function shared(path: string, title: string, description: string, current: 'work
     name: NAME,
     sprite: SPRITE,
     wall,
-    workCurrent: current === 'work' ? ' aria-current="page"' : '',
-    aboutCurrent: current === 'about' ? ' aria-current="page"' : '',
     email: LINKS.email,
     linkedin: LINKS.linkedin,
-    resume: LINKS.resume,
-    githubItem: LINKS.github ? `<li><a href="${esc(LINKS.github)}">GitHub</a></li>` : '',
+    github: LINKS.github,
   };
 }
 
@@ -78,23 +69,6 @@ function write(relPath: string, html: string) {
 rmSync(join(ROOT, 'work'), { recursive: true, force: true });
 rmSync(join(ROOT, 'about'), { recursive: true, force: true });
 
-// /work
-const rows = PROJECTS.map((p, i) => {
-  const cw = CW[i % CW.length];
-  return `<li class="project-row cw-${cw}"><a href="/work/${esc(p.slug)}">
-      <span class="index">${esc(p.index)}</span>
-      <span class="row-title">${esc(p.title)}</span>
-      <span class="row-outcome">${esc(p.outcome)}</span>
-      <span class="row-meta">${esc(p.role)} / ${esc(p.timeline)}</span>
-      <span class="row-art">${art(p.heroImage, cw)}</span>
-    </a></li>`;
-}).join('\n');
-write('work/index.html', render(tpl('work.html'), {
-  ...shared('/work', `Work | ${NAME}`, `Selected product work by ${NAME}. ${TAGLINE}`, 'work'),
-  projectRows: rows,
-  marquee,
-}));
-
 // /work/<slug>
 PROJECTS.forEach((p, i) => {
   const cw = CW[i % CW.length];
@@ -105,7 +79,7 @@ PROJECTS.forEach((p, i) => {
     }</section>`)
     .join('\n');
   write(`work/${p.slug}/index.html`, render(tpl('case-study.html'), {
-    ...shared(`/work/${p.slug}`, `${p.title} | ${NAME}`, p.summary, 'work'),
+    ...shared(`/work/${p.slug}`, `${p.title} | ${NAME}`, p.summary),
     cw,
     index: p.index,
     projectTitle: p.title,
@@ -121,22 +95,8 @@ PROJECTS.forEach((p, i) => {
   }));
 });
 
-// /about
-write('about/index.html', render(tpl('about.html'), {
-  ...shared('/about', `About | ${NAME}`, ABOUT.slice(0, 155), 'about'),
-  tagline: TAGLINE,
-  about: ABOUT,
-  aiBuildNote: AI_BUILD_NOTE,
-  portrait: PORTRAIT
-    ? `<img class="portrait" src="${esc(PORTRAIT)}" alt="Portrait of ${esc(NAME)}" width="800" height="1000" loading="lazy">`
-    : lips('lips-big'),
-  tools: BUILD_TOOLS.map((t) => `<li>${esc(t)}</li>`).join(''),
-  problems: BUILD_PROBLEMS.map((t) => `<li>${esc(t)}</li>`).join(''),
-  repoLink: LINKS.github ? `<p><a class="big-link small" href="${esc(LINKS.github)}">VIEW THE CODE</a></p>` : '',
-}));
-
 // sitemap only when a real domain is set; robots.txt always
-const routes = ['/', '/work', ...PROJECTS.map((p) => `/work/${p.slug}`), '/about'];
+const routes = ['/', ...PROJECTS.map((p) => `/work/${p.slug}`)];
 if (site) {
   write('public/sitemap.xml',
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${
@@ -145,4 +105,4 @@ if (site) {
 }
 write('public/robots.txt', `User-agent: *\nAllow: /\n${site ? `Sitemap: ${site}/sitemap.xml\n` : ''}`);
 
-console.log(`build-pages: wrote /work, /about and ${PROJECTS.length} case study page(s)`);
+console.log(`build-pages: wrote ${PROJECTS.length} case study page(s)`);

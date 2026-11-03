@@ -62,27 +62,6 @@ if (!reduce) {
   });
 }
 
-// --- /work: floating preview that follows the cursor (mouse devices only) ---
-const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-const rows = document.querySelectorAll<HTMLElement>('.project-row');
-if (finePointer && rows.length) {
-  const preview = document.createElement('div');
-  preview.className = 'hover-preview';
-  preview.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(preview);
-  const moveX = gsap.quickTo(preview, 'x', { duration: 0.35, ease: 'power3' });
-  const moveY = gsap.quickTo(preview, 'y', { duration: 0.35, ease: 'power3' });
-  rows.forEach((row) => {
-    row.addEventListener('mouseenter', () => {
-      const src = row.querySelector('.row-art .art');
-      if (src) preview.innerHTML = src.outerHTML;
-      preview.classList.add('on');
-    });
-    row.addEventListener('mouseleave', () => preview.classList.remove('on'));
-    row.addEventListener('mousemove', (e) => { moveX(e.clientX + 24); moveY(e.clientY - 100); });
-  });
-}
-
 // --- misregistration: ink layer starts off-register, snaps into place ---
 const arts = document.querySelectorAll<HTMLElement>('.cs-section .misreg, .cs-image-wrap .misreg');
 if (reduce) {

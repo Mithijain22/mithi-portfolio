@@ -10,8 +10,6 @@ const r = (p: string) => resolve(import.meta.dirname, p);
 const input: Record<string, string> = {
   game: r('index.html'),
   notFound: r('404.html'),
-  work: r('work/index.html'),
-  about: r('about/index.html'),
 };
 for (const p of PROJECTS) input[`work-${p.slug}`] = r(`work/${p.slug}/index.html`);
 

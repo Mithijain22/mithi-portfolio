@@ -2,17 +2,17 @@ import { gsap } from 'gsap';
 import { PROJECTS } from '../content.ts';
 
 // Case study teaser. Content comes only from content.ts.
-export function showPoster(i: number, secs: number, last: boolean, onDone: () => void) {
+export function showPoster(i: number, last: boolean, onDone: () => void) {
   const p = PROJECTS[i];
   const el = document.createElement('div');
   el.className = 'poster';
   el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', p.title);
-  el.innerHTML = `<p class="pidx">${p.index} &nbsp; FOUND IN ${secs.toFixed(1)}S</p>
+  el.innerHTML = `<p class="pidx">${p.index}</p>
   <h2 class="ptitle">${p.title}</h2><p class="script pnote">${p.annotation}</p>
   <p class="pout">${p.outcome}</p>
   <div class="p3"><div><h3>PROBLEM</h3><p>${p.problem}</p></div><div><h3>APPROACH</h3><p>${p.approach}</p></div><div><h3>RESULT</h3><p>${p.result}</p></div></div>
   <p class="pmeta">${p.role} / ${p.timeline} / ${p.tools}</p>
-  <div class="pbtns"><a class="pbtn" href="/work/${p.slug}">READ FULL CASE STUDY</a><button class="pbtn alt" type="button">${last ? 'SEE ALL WORK' : 'KEEP PLAYING'}</button></div>`;
+  <div class="pbtns"><a class="pbtn" href="${p.repo || `/work/${p.slug}`}"${p.repo ? ' target="_blank" rel="noopener"' : ''}>${p.repo ? 'VIEW ON GITHUB' : 'READ FULL CASE STUDY'}</a><button class="pbtn alt" type="button">${last ? 'SEE ALL WORK' : 'KEEP PLAYING'}</button></div>`;
   document.body.appendChild(el);
   const close = () => { document.removeEventListener('keydown', esc); el.remove(); onDone(); };
   const esc = (e: KeyboardEvent) => { if (e.key === 'Escape') close(); };

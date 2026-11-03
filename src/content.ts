@@ -22,6 +22,7 @@ export interface Project {
   heroImage: string;
   summary: string;
   caseStudy: { sections: CaseStudySection[] };
+  repo: string; // optional GitHub repo; if set, the work panel links here instead of the case study page
 }
 
 export const NAME = 'MITHI';
@@ -51,6 +52,7 @@ export const PROJECTS: Project[] = [
     approach: 'DUMMY APPROACH. One or two sentences.',
     result: 'DUMMY RESULT. One or two sentences.',
     heroImage: '',
+    repo: '',
     summary: 'DUMMY SUMMARY. Two sentences for the work index. Replace later.',
     caseStudy: { sections: dummySections() },
   },
@@ -67,6 +69,7 @@ export const PROJECTS: Project[] = [
     approach: 'DUMMY APPROACH. One or two sentences.',
     result: 'DUMMY RESULT. One or two sentences.',
     heroImage: '',
+    repo: '',
     summary: 'DUMMY SUMMARY. Two sentences for the work index. Replace later.',
     caseStudy: { sections: dummySections() },
   },
@@ -83,30 +86,16 @@ export const PROJECTS: Project[] = [
     approach: 'DUMMY APPROACH. One or two sentences.',
     result: 'DUMMY RESULT. One or two sentences.',
     heroImage: '',
+    repo: '',
     summary: 'DUMMY SUMMARY. Two sentences for the work index. Replace later.',
     caseStudy: { sections: dummySections() },
   },
 ];
 
-export const ABOUT =
-  'DUMMY ABOUT TEXT. Replace with sixty to ninety words about who you are, what you build and how you think about products.';
-
-export const AI_BUILD_NOTE =
-  'DUMMY AI BUILD NOTE. Replace with eighty to one hundred twenty words on how this site was built with AI, what worked and what broke.';
-
-export const BUILD_TOOLS = ['Claude', 'Vite', 'TypeScript', 'GSAP', 'Howler.js'];
-
-export const BUILD_PROBLEMS = [
-  'DUMMY PROBLEM ONE. What broke while building, and how you fixed it.',
-  'DUMMY PROBLEM TWO. What broke while building, and how you fixed it.',
-  'DUMMY PROBLEM THREE. What broke while building, and how you fixed it.',
-];
-
 export const LINKS = {
-  email: 'hello@example.com',
-  linkedin: 'https://www.linkedin.com/in/your-name',
-  resume: '/resume.pdf',
-  github: '',
+  email: 'mithijain220405@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/mithi-jain-856825330/',
+  github: 'https://github.com/Mithijain22',
 };
 
 // Hero: one image per letter of NAME, in order (shown on hover).
