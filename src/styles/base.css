@@ -25,17 +25,14 @@ a { color: inherit; }
   background: url('/grain.png') repeat;
   background-size: 256px 256px;
   mix-blend-mode: screen;   /* visible on black */
-  opacity: 0.08;
+  opacity: 0.14;
   pointer-events: none;
   z-index: 9999;
   animation: grain-shift 1s steps(1, end) infinite;
 }
 
 /* Cream portfolio pages need overlay to show the grain */
-.site .grain {
-  mix-blend-mode: overlay;
-  opacity: 0.15;
-}
+.site .grain { mix-blend-mode: screen; opacity: 0.14; }
 
 @keyframes grain-shift {
   0%   { transform: translate(0, 0); }

@@ -165,3 +165,19 @@ body.site { background: var(--cream); color: var(--black); }
 
 /* ---------- 404 ---------- */
 .not-found a { font-family: var(--font-display); font-size: 24px; display: inline-block; min-height: 44px; margin-right: 24px; }
+
+/* black theme for the case study pages */
+body.site { background: var(--black); color: var(--cream); }
+.site :focus-visible { outline-color: var(--orange-red); }
+.site .giant, .site .cs-title { color: var(--cream); }
+.site .cs-flip { color: var(--flip); }
+.site .script { color: var(--orange-red); }
+.site-bar { background: var(--black); border-bottom-color: rgba(252,227,213,.25); }
+.site-bar nav a:hover { border-bottom-color: var(--cream); }
+.menu-btn { background: var(--cream); color: var(--black); }
+@media (max-width: 767px) { .site-bar nav { background: var(--black); border-bottom-color: rgba(252,227,213,.25); } }
+.page-fade { background: var(--black); }
+.meta-row, .next-block { border-color: rgba(252,227,213,.3); }
+.next-link:hover strong { color: var(--orange-red); }
+.all-link { background: var(--cream); color: var(--black); }
+.site-footer { border-top: 1px solid rgba(252,227,213,.25); }

@@ -10,7 +10,7 @@ export function mountSections() {
   const app = document.getElementById('app')!;
   const work = document.createElement('section');
   work.id = 'work'; work.className = 'worksec';
-  work.innerHTML = `<div class="whead"><h2>WORK</h2><span class="script" aria-hidden="true">selected</span></div>
+  work.innerHTML = `<div class="whead"><h2>WORK</h2></div>
   <ol class="wlist">${PROJECTS.map((p, i) => `<li class="wpanel" style="--bg:${BG[i % 3]}"><a href="${p.repo || `/work/${p.slug}`}"${p.repo ? ' target="_blank" rel="noopener"' : ''}>
     <span class="widx">${p.index}</span>
     <span class="wimg">${p.heroImage ? `<img src="${p.heroImage}" alt="" loading="lazy" width="1600" height="900">` : dotArt}</span>

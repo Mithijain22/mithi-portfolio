@@ -26,7 +26,7 @@ export interface Project {
 }
 
 export const NAME = 'MITHI';
-export const TAGLINE = 'I ship products. Beat my backlog.';
+export const TAGLINE = 'Ideas merge, products ship.';
 export const PORTRAIT = ''; // path to posterized portrait; empty = lips fallback
 
 // Set when a real domain exists. Empty = no canonical URLs, OG url or sitemap.
