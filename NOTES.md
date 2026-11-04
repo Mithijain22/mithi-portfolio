@@ -19,3 +19,8 @@ Decisions and deviations from the spec.
 - **Pages removed:** no `/work` index and no `/about` page. Work is a section on the home page (`#work`);
   each project keeps a case study page at `/work/<slug>`, or links to its GitHub repo if `repo` is set in `content.ts`.
 - **Work panel colours:** teal `#12B5C4`, yellow `#F5D90A`, hot pink `#EE3E9C`.
+- **Fruit-merge game integrated.** Source lives in `src/fruit-merge/` (unchanged from the delivered build, minus its dev
+  harness and gallery). `src/game/host.ts` mounts it in the TV screen, opens the project preview card on each unlock
+  (the game waits until the card is closed), and pauses the game when the TV scrolls out of view.
+- New dependencies: `matter-js 0.20.0`, `@types/matter-js 0.19.8`; `@mediapipe/tasks-vision` raised to `0.10.21`
+  (matches the WASM URL in `src/fruit-merge/config.ts`). Versions were not checked against the npm registry.

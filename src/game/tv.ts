@@ -1,5 +1,5 @@
 import { gsap } from 'gsap';
-import { initGame } from './slot.ts';
+import { initGame } from './host.ts';
 
 const B = '#0A0A0A', CREAM = '#FCE3D5', OR = '#F2502C', ORG = '#FF7A1A', PINK = '#F2C6E0', YEL = '#F5D90A';
 const dots = Array.from({ length: 24 }, (_, i) => `<circle cx="${644 + (i % 8) * 26}" cy="${959 + Math.floor(i / 8) * 14}" r="4" fill="${B}"/>`).join('');
