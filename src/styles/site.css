@@ -114,7 +114,7 @@ body.site { background: var(--cream); color: var(--black); }
 /* colour flip: a copy of the title, clipped to the image, in a contrasting colour */
 .cs-flip { position: absolute; left: calc(var(--ml) * -1); width: calc(100% + var(--ml)); top: 0; transform: translateY(calc(-100% + var(--fs) * 0.42)); color: var(--flip); z-index: 3; pointer-events: none; }
 .cs-header .annotation { margin-top: 24px; transform: rotate(-4deg); transform-origin: left; }
-.meta-row { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin: 48px 0; padding: 24px 0; border-block: 1px solid rgba(10, 10, 10, 0.4); }
+.meta-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; margin: 48px 0; padding: 24px 0; border-block: 1px solid rgba(10, 10, 10, 0.4); }
 .meta-row dt { font-family: var(--font-mono); font-size: 13px; }
 .meta-row dd { margin: 4px 0 0; font-size: 18px; }
 @media (max-width: 767px) { .meta-row { grid-template-columns: 1fr 1fr; } .cs-hero { --ml: 0px; } }
@@ -181,3 +181,15 @@ body.site { background: var(--black); color: var(--cream); }
 .next-link:hover strong { color: var(--orange-red); }
 .all-link { background: var(--cream); color: var(--black); }
 .site-footer { border-top: 1px solid rgba(252,227,213,.25); }
+
+/* case study: richer text, big numbers, link buttons */
+.art img { object-position: 50% 20%; }
+.cs-section ul { max-width: 70ch; padding-left: 20px; margin: 0; }
+.cs-section li { margin: 0 0 10px; font-size: 18px; }
+.cs-section p { margin: 0 0 16px; }
+.cs-stats { list-style: none; margin: 0 0 40px; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; }
+.cs-stats li { border: 3px solid var(--cream); padding: 20px; display: flex; flex-direction: column; gap: 8px; box-shadow: 8px 8px 0 var(--orange-red); }
+.cs-stats b { font-family: var(--font-display); font-weight: 400; font-size: clamp(40px, 5vw, 80px); line-height: .9; }
+.cs-stats span { font-family: var(--font-mono); font-size: 13px; text-transform: uppercase; }
+.cs-links { margin: 0 0 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+.cs-links a { font-family: var(--font-display); font-size: 22px; letter-spacing: .05em; background: var(--cream); color: var(--black); padding: 12px 22px; min-height: 44px; display: inline-flex; align-items: center; text-decoration: none; box-shadow: 4px 4px 0 var(--orange-red); }

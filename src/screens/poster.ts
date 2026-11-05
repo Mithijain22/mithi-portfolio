@@ -11,7 +11,7 @@ export function showPoster(i: number, last: boolean, onDone: () => void) {
   <h2 class="ptitle">${p.title}</h2><p class="script pnote">${p.annotation}</p>
   <p class="pout">${p.outcome}</p>
   <div class="p3"><div><h3>PROBLEM</h3><p>${p.problem}</p></div><div><h3>APPROACH</h3><p>${p.approach}</p></div><div><h3>RESULT</h3><p>${p.result}</p></div></div>
-  <p class="pmeta">${p.role} / ${p.timeline} / ${p.tools}</p>
+  <p class="pmeta">${[p.role, p.timeline, p.tools].filter(Boolean).join(' / ')}</p>
   <div class="pbtns"><a class="pbtn" href="${p.repo || `/work/${p.slug}`}"${p.repo ? ' target="_blank" rel="noopener"' : ''}>${p.repo ? 'VIEW ON GITHUB' : 'READ FULL CASE STUDY'}</a><button class="pbtn alt" type="button">${last ? 'SEE ALL WORK' : 'KEEP PLAYING'}</button></div>`;
   document.body.appendChild(el);
   const close = () => { document.removeEventListener('keydown', esc); el.remove(); onDone(); };

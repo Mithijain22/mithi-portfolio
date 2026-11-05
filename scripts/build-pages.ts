@@ -13,6 +13,17 @@ const esc = (s: string) =>
 
 type Vars = Record<string, string>;
 
+const inline = (t: string) => esc(t).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+// blank line = paragraph, lines starting with "- " = bullet list, **bold**
+function rich(body: string): string {
+  return body.trim().split(/\n\s*\n/).map((b) => {
+    const lines = b.split('\n').map((l) => l.trim()).filter(Boolean);
+    return lines.every((l) => l.startsWith('- '))
+      ? `<ul>${lines.map((l) => `<li>${inline(l.slice(2))}</li>`).join('')}</ul>`
+      : `<p>${inline(lines.join(' '))}</p>`;
+  }).join('');
+}
+
 function render(template: string, vars: Vars): string {
   // partials first ({{> name}}), then raw ({{{x}}}), then escaped ({{x}})
   let out = template.replace(/\{\{>\s*(\w+)\s*\}\}/g, (_, n: string) => tpl(`${n}.html`));
@@ -56,7 +67,7 @@ function art(src: string, cw: string, extra = ''): string {
   const inner = src
     ? `<img src="${esc(src)}" alt="" loading="lazy" width="1600" height="900">`
     : `<svg class="art-dots" viewBox="0 0 160 96" aria-hidden="true" preserveAspectRatio="xMidYMid slice"><use href="#art-dots"/></svg>`;
-  return `<div class="art duo misreg cw-${cw} ${extra}">${inner}</div>`;
+  return `<div class="art misreg cw-${cw} ${extra}">${inner}</div>`;
 }
 
 function write(relPath: string, html: string) {
@@ -74,7 +85,7 @@ PROJECTS.forEach((p, i) => {
   const cw = CW[i % CW.length];
   const next = PROJECTS[(i + 1) % PROJECTS.length];
   const sections = p.caseStudy.sections
-    .map((s, j) => `<section class="cs-section"><h2>${esc(s.heading)}</h2><p>${esc(s.body)}</p>${
+    .map((s, j) => `<section class="cs-section"><h2>${esc(s.heading)}</h2>${rich(s.body)}${
       s.image ? art(s.image, CW[(i + j + 1) % CW.length], 'full') : ''
     }</section>`)
     .join('\n');
@@ -84,10 +95,10 @@ PROJECTS.forEach((p, i) => {
     index: p.index,
     projectTitle: p.title,
     annotation: p.annotation,
-    role: p.role,
-    timeline: p.timeline,
-    tools: p.tools,
-    outcome: p.outcome,
+    meta: ([['ROLE', p.role], ['TIMELINE', p.timeline], ['TOOLS', p.tools], ['OUTCOME', p.outcome]] as [string, string][])
+      .filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join(''),
+    stats: p.stats.length ? `<ul class="cs-stats">${p.stats.map((t) => `<li><b>${esc(t.value)}</b><span>${esc(t.label)}</span></li>`).join('')}</ul>` : '',
+    links: p.links.length ? `<p class="cs-links">${p.links.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} &rarr;</a>`).join('')}</p>` : '',
     art: art(p.heroImage, cw),
     sections,
     nextSlug: next.slug,
