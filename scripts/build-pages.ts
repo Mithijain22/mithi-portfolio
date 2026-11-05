@@ -98,7 +98,7 @@ PROJECTS.forEach((p, i) => {
     meta: ([['ROLE', p.role], ['TIMELINE', p.timeline], ['TOOLS', p.tools], ['OUTCOME', p.outcome]] as [string, string][])
       .filter(([, v]) => v).map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join(''),
     stats: p.stats.length ? `<ul class="cs-stats">${p.stats.map((t) => `<li><b>${esc(t.value)}</b><span>${esc(t.label)}</span></li>`).join('')}</ul>` : '',
-    links: p.links.length ? `<p class="cs-links">${p.links.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} &rarr;</a>`).join('')}</p>` : '',
+    links: `<p class="cs-links">${p.links.map((l) => `<a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} &rarr;</a>`).join('')}<a class="cs-back" href="/#game">BACK TO THE GAME</a></p>`,
     art: art(p.heroImage, cw),
     sections,
     nextSlug: next.slug,
