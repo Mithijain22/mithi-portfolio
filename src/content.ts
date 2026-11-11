@@ -32,8 +32,8 @@ export const SITE_URL = ''; // set when a real domain exists
 export const PROJECTS: Project[] = [
   {
     index: '00_1',
-    slug: 'truck-art-daily',
-    title: 'TRUCK ART DAILY',
+    slug: 'wordle',
+    title: 'WOरDLE',
     annotation: 'a word game with a clue',
     outcome: `A live daily word puzzle with server-side scoring, over 160 automated tests, and artwork cut from 15 MB to under 1 MB.`,
     role: 'Creator and product owner',
@@ -113,7 +113,7 @@ I built the screens from three approved reference pages and compared screenshots
       { value: '5.0% → 55.2%', label: '1-star rate for 0–3 day vs 30+ day deliveries' },
       { value: '96,478', label: 'delivered orders analysed' },
     ],
-    links: [],
+    links: [{ label: 'VIEW ON GITHUB', url: 'https://github.com/Mithijain22/Causa' }],
     repo: '',
     caseStudy: { sections: [
       { heading: 'THE QUESTION', body: `Why do 1-star reviews cluster around certain sellers and regions on Olist, a Brazilian e-commerce marketplace? Is it a logistics problem, a product problem, a seller-service problem, or some mix? And can any of it be shown causally, not just as correlation?
@@ -177,7 +177,7 @@ I propose a seller-randomised A/B test with a power calculation for three possib
       { value: '6 of 6', label: 'backtest windows with a positive saving' },
       { value: '2,260', label: 'item-store series, scored on unseen demand' },
     ],
-    links: [],
+    links: [{ label: 'VIEW ON GITHUB', url: 'https://github.com/Mithijain22/Delphi' }],
     repo: '',
     caseStudy: { sections: [
       { heading: 'THE QUESTION', body: `Most public solutions to the M5 forecasting competition optimise leaderboard rank. Delphi asks something more useful for a business: does a full predictive distribution actually pay for itself in a real inventory decision, and by how much?
