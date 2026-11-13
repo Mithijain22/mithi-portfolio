@@ -221,7 +221,13 @@ export const LINKS = {
 
 // Hero: one image per letter of NAME, in order (shown on hover).
 export const HERO_IMAGES = ['/img/m.jpg', '/img/i1.jpg', '/img/t.jpg', '/img/h.jpg', '/img/i2.jpg'];
-export const HERO_SCRIPT = 'Hello';
+
+// Block-reveal intro between the loader and the hero. faces: [centerX, centerY, width, height] as a share of
+// each image, or null if no face shows (taken from the effect's original code).
+export const REVEAL = {
+  images: ['/img/reveal/1.jpg', '/img/reveal/2.jpg', '/img/reveal/3.jpg', '/img/reveal/4.jpg', '/img/reveal/5.jpg'],
+  faces: [[0.50, 0.49, 0.13, 0.18], null, [0.48, 0.34, 0.15, 0.21], null, [0.55, 0.27, 0.25, 0.23]] as (number[] | null)[],
+};
 
 // Small corner text on the loading screen (placeholders).
 export const LOADER_TEXT = {
