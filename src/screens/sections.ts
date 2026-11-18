@@ -13,7 +13,7 @@ export function mountSections() {
   work.innerHTML = `<div class="whead"><h2>WORK</h2></div>
   <ol class="wlist">${PROJECTS.map((p, i) => `<li class="wpanel" style="--bg:${BG[i % 3]}"><a href="${p.repo || `/work/${p.slug}`}"${p.repo ? ' target="_blank" rel="noopener"' : ''}>
     <span class="widx">${p.index}</span>
-    <span class="wimg">${p.heroImage ? `<img src="${p.heroImage}" alt="" loading="lazy" width="736" height="1104">` : p.cardStat ? `<span class="wstat"><b>${p.cardStat.value}</b><i>${p.cardStat.label}</i></span>` : dotArt}</span>
+    <span class="wimg">${p.heroImage ? `<img src="${p.heroImage}" alt="" loading="lazy" width="600" height="900">` : p.cardStat ? `<span class="wstat"><b>${p.cardStat.value}</b><i>${p.cardStat.label}</i></span>` : dotArt}</span>
     <b>${p.title}</b><em>${p.summary}</em><span class="wbtn">VIEW PROJECT &rarr;</span></a></li>`).join('')}</ol>`;
   const foot = document.createElement('footer');
   foot.id = 'links'; foot.className = 'foot';

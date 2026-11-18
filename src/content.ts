@@ -42,7 +42,7 @@ export const PROJECTS: Project[] = [
     problem: `Sometimes a Wordle answer is a word you have never heard of, and letter-guessing stops being fair.`,
     approach: `Every daily puzzle comes with a trivia clue, so what you already know can lead you to the word. The server keeps the answer and scores every guess.`,
     result: `Live and played daily. Early players found the clue sometimes distracting, which is shaping what I test next.`,
-    heroImage: '/img/truck-art-daily.jpg',
+    heroImage: '/img/truck-art-daily.webp',
     summary: `A daily word puzzle with a trivia clue, built for the words you have never heard of. React, TypeScript and Supabase, with the answers kept on the server.`,
     stats: [
       { value: '160+', label: 'automated tests' },
@@ -220,12 +220,12 @@ export const LINKS = {
 };
 
 // Hero: one image per letter of NAME, in order (shown on hover).
-export const HERO_IMAGES = ['/img/m.jpg', '/img/i1.jpg', '/img/t.jpg', '/img/h.jpg', '/img/i2.jpg'];
+export const HERO_IMAGES = ['/img/m.webp', '/img/i1.webp', '/img/t.webp', '/img/h.webp', '/img/i2.webp'];
 
 // Block-reveal intro between the loader and the hero. faces: [centerX, centerY, width, height] as a share of
 // each image, or null if no face shows (taken from the effect's original code).
 export const REVEAL = {
-  images: ['/img/reveal/1.jpg', '/img/reveal/2.jpg', '/img/reveal/3.jpg', '/img/reveal/4.jpg', '/img/reveal/5.jpg'],
+  images: ['/img/reveal/1.webp', '/img/reveal/2.webp', '/img/reveal/3.webp', '/img/reveal/4.webp', '/img/reveal/5.webp'],
   faces: [[0.50, 0.49, 0.13, 0.18], null, [0.48, 0.34, 0.15, 0.21], null, [0.55, 0.27, 0.25, 0.23]] as (number[] | null)[],
 };
 

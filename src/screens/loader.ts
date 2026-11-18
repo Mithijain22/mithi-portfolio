@@ -4,7 +4,7 @@ import { LOADER_TEXT } from '../content.ts';
 const lines = (a: string[]) => a.map((s) => `<div>${s}</div>`).join('');
 
 // 0 to 100 %, then a few quick glitch flickers, then resolves.
-export function runLoader(): Promise<void> {
+export function runLoader(ready: Promise<unknown> = Promise.resolve()): Promise<void> {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const el = document.createElement('div');
   el.className = 'loader';
@@ -15,8 +15,11 @@ export function runLoader(): Promise<void> {
   const n = { v: 0 };
   return new Promise((done) => {
     const tl = gsap.timeline({ onComplete: () => { el.remove(); done(); } });
-    tl.to(n, { v: 100, duration: reduce ? 0.3 : 2.4, ease: 'power1.inOut',
-      onUpdate: () => { const p = Math.round(n.v); num.textContent = String(p); bar.style.width = p + '%'; } });
+    const upd = () => { const p = Math.round(n.v); num.textContent = String(p); bar.style.width = p + '%'; };
+    tl.to(n, { v: 90, duration: reduce ? 0.2 : 2.2, ease: 'power1.inOut', onUpdate: upd });
+    // hold at 90 % until the pictures and fonts are really loaded (but never longer than 8 s)
+    tl.call(() => { tl.pause(); Promise.race([ready, new Promise((r) => setTimeout(r, 8000))]).then(() => tl.play()); });
+    tl.to(n, { v: 100, duration: 0.25, ease: 'none', onUpdate: upd });
     if (reduce) return;
     // glitch: slivers flash at the sides, the counter stutters
     const t0 = tl.duration();
