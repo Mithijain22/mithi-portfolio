@@ -12,6 +12,9 @@ import { mountGame } from './game/tv.ts';
 import { mountSections } from './screens/sections.ts';
 
 initBananaCursor();
+// SKIP TO WORK clicked before the page is built: remember it and jump when the intro ends
+let pending = '';
+document.querySelector('.skip')?.addEventListener('click', (e) => { if (!document.getElementById('work')) { e.preventDefault(); pending = 'work'; } });
 // skip the loader when arriving at a section link (e.g. BACK TO THE GAME) or after the intro was already seen
 let seen = false;
 try { seen = sessionStorage.getItem('seen') === '1'; } catch { /* ignore */ }
@@ -23,5 +26,6 @@ intro.then(() => {
   try { sessionStorage.setItem('seen', '1'); } catch { /* ignore */ }
   document.body.classList.remove('locked');
   showHero(); mountGame(); mountSections();
-  if (location.hash) document.getElementById(location.hash.slice(1))?.scrollIntoView();
+  const target = pending || location.hash.slice(1);
+  if (target) document.getElementById(target)?.scrollIntoView();
 });

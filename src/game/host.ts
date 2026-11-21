@@ -27,7 +27,13 @@ export function initGame(screen: HTMLElement) {
   let started = false, visible = false;
   const card = document.createElement('div');
   card.className = 'tmsg';
-  card.innerHTML = '<h2>MERGE THE FRUIT</h2><p>MERGE FRUITS TO UNLOCK THREE PROJECTS.</p><div><button type="button">START</button></div>';
+  card.innerHTML = `<h2>MERGE MY IDEAS <small>(FRUITS)</small> TO SHIP PRODUCTS</h2>
+    <ol class="tsteps">
+      <li><b>1</b><span>AIM</span><i>Point a finger at the camera, or move your mouse.</i></li>
+      <li><b>2</b><span>DROP</span><i>Pinch your fingers together, or click.</i></li>
+      <li><b>3</b><span>MERGE</span><i>Two matching fruits make a bigger one. Make an orange, an apple and a watermelon to unlock my three projects.</i></li>
+    </ol>
+    <div><button type="button">START</button></div>`;
   card.querySelector('button')!.addEventListener('click', () => {
     started = true; card.remove(); game.start();
     if (!visible) game.pause();

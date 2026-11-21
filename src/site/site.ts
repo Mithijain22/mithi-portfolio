@@ -45,23 +45,6 @@ try {
   }
 } catch { /* storage blocked: ignore */ }
 
-// --- 200 ms cream fade on same-site link clicks ---
-const fade = document.createElement('div');
-fade.className = 'page-fade';
-document.body.appendChild(fade);
-window.addEventListener('pageshow', () => fade.classList.remove('on')); // Back button
-if (!reduce) {
-  document.addEventListener('click', (e) => {
-    const a = (e.target as HTMLElement).closest('a');
-    if (!a || e.defaultPrevented || e.button !== 0) return;
-    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-    if (a.target === '_blank' || a.origin !== location.origin || a.hash && a.pathname === location.pathname) return;
-    e.preventDefault();
-    fade.classList.add('on');
-    setTimeout(() => { location.assign(a.href); }, 200);
-  });
-}
-
 // --- misregistration: ink layer starts off-register, snaps into place ---
 const arts = document.querySelectorAll<HTMLElement>('.cs-section .misreg, .cs-image-wrap .misreg');
 if (reduce) {

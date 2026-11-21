@@ -54,19 +54,20 @@
 .fm-ladder-title { font-size: 44px; }
 .fm-next-title { font-size: 40px; color: var(--fm-black); }
 .fm-slot-glyph { font-size: 68px; display: flex; align-items: center; justify-content: center; line-height: 1; }
-.fm-hint { line-height: 1.5; }
+.fm-hint { line-height: 1.3; font-weight: 700; border-left: 5px solid #F2502C; padding-left: 10px; box-sizing: border-box; }
 .fm-legend {
   position: absolute;
   box-sizing: border-box;
-  border: 1px solid rgba(252, 227, 213, 0.4);
-  padding: 22px 26px;
+  border: 3px solid #FCE3D5;
+  background: rgba(10, 10, 10, 0.8);
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 8px;
 }
 .fm-legend-lines { display: flex; flex-direction: column; gap: 8px; }
-.fm-legend-line { letter-spacing: 0.06em; font-size: inherit; }
+.fm-legend-line { letter-spacing: 0.04em; font-size: inherit; font-weight: 700; }
 .fm-plus { position: absolute; line-height: 1; font-size: 16px; color: var(--fm-cream); }
 .fm-plus-tl { left: -6px; top: -9px; }
 .fm-plus-tr { right: -6px; top: -9px; }
@@ -101,9 +102,9 @@
 .fm-btn:active { transform: translate(3px, 3px); box-shadow: 2px 2px 0 var(--fm-black); }
 
 /* Camera: status chip, toggle, permission card, hidden video */
-.fm-chip { font-size: 12px; letter-spacing: 0.06em; }
+.fm-chip { font-size: 15px; letter-spacing: 0.06em; }
 .fm-toggle {
-  position: absolute; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
+  position: absolute; font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--fm-cream); background: transparent; cursor: pointer;
   border: 1px solid rgba(252, 227, 213, 0.4); padding: 8px 12px; pointer-events: auto;
 }

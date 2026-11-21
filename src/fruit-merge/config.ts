@@ -93,10 +93,10 @@ export const LAYOUTS: Record<string, LayoutDef> = {
       title: { x: 1370, y: 28, w: 214, size: 30, align: 'center' },
       disc: { x: 1477, y: 114, maxR: 30 },
     },
-    hint: { x: 1370, y: 176, w: 214, size: 16, align: 'left' },
+    hint: { x: 1370, y: 176, w: 214, size: 24, align: 'left' },
     chip: { x: 1370, y: 420, w: 214 },
     toggle: { x: 1370, y: 470 },
-    legend: { x: 1370, y: 600, w: 214, h: 166, size: 18 },
+    legend: { x: 1370, y: 590, w: 214, h: 176, size: 21 },
   },
 };
 

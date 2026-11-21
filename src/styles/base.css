@@ -44,3 +44,8 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .grain { animation: none; }
 }
+
+/* chilli cursor (shared by the home page and the project pages) */
+html.chilli-on, html.chilli-on * { cursor: none !important; }
+.chilli { position: fixed; left: 0; top: 0; z-index: 10001; pointer-events: none; opacity: 0; will-change: transform; }
+.chilli img { display: block; transform-origin: 1.9px 2.1px; transition: transform .12s ease-out; }

@@ -1,8 +1,5 @@
 /* Game page screens: loader, hero. */
 html { scroll-behavior: smooth; } body.locked { overflow: hidden; }
-html.chilli-on, html.chilli-on * { cursor: none !important; }
-.chilli { position: fixed; left: 0; top: 0; z-index: 10001; pointer-events: none; opacity: 0; }
-.chilli img { display: block; }
 .toast { position: fixed; left: 50%; bottom: 40px; transform: translateX(-50%); z-index: 500; background: var(--cream); color: var(--black); font-family: var(--font-display); letter-spacing: .05em; padding: 12px 20px; box-shadow: 4px 4px 0 var(--orange-red); }
 
 .skip { position: fixed; top: 20px; right: 24px; z-index: 400; font-family: var(--font-display); font-size: 16px; letter-spacing: .05em; text-decoration: none; color: var(--cream); border: 1px solid var(--cream); padding: 10px 16px; min-height: 44px; display: inline-flex; align-items: center; background: var(--black); }
@@ -108,3 +105,13 @@ html.chilli-on .tvscreen, html.chilli-on .tvscreen * { cursor: default !importan
 
 /* block-reveal intro */
 .reveal { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 150; background: var(--black); display: block; }
+
+/* TV start card: headline + how to play */
+.tmsg h2 { font-size: clamp(26px, 4.4vw, 74px); max-width: 92%; }
+.tmsg h2 small { font-size: .55em; color: var(--orange-red); }
+.tsteps { list-style: none; margin: 4px 0; padding: 0; width: 92%; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(8px, 1.2vw, 20px); text-align: left; }
+.tsteps li { border: 3px solid var(--cream); padding: clamp(8px, 1vw, 16px); display: flex; flex-direction: column; gap: 4px; }
+.tsteps b { font-family: var(--font-display); font-weight: 400; font-size: clamp(28px, 3.4vw, 56px); line-height: .9; color: var(--orange-red); }
+.tsteps span { font-family: var(--font-display); font-size: clamp(16px, 1.9vw, 30px); letter-spacing: .05em; }
+.tsteps i { font-style: normal; font-family: var(--font-body); font-size: clamp(11px, 1.2vw, 19px); line-height: 1.35; }
+@media (max-width: 767px) { .tsteps { grid-template-columns: 1fr; } }
