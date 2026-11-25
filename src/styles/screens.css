@@ -115,3 +115,5 @@ html.chilli-on .tvscreen, html.chilli-on .tvscreen * { cursor: default !importan
 .tsteps span { font-family: var(--font-display); font-size: clamp(16px, 1.9vw, 30px); letter-spacing: .05em; }
 .tsteps i { font-style: normal; font-family: var(--font-body); font-size: clamp(11px, 1.2vw, 19px); line-height: 1.35; }
 @media (max-width: 767px) { .tsteps { grid-template-columns: 1fr; } }
+
+.tlabel { font-family: var(--font-mono) !important; font-size: clamp(11px, 1.3vw, 18px) !important; letter-spacing: .12em; color: var(--orange-red); margin: 0 0 2px !important; }

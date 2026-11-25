@@ -1,5 +1,5 @@
 // DOM HUD: all text, positioned in logical 1600x800 coordinates inside a scaled layer.
-import { JUICE, LAYOUT, LOGICAL, TEXT } from './config';
+import { ENDLESS, JUICE, LAYOUT, LOGICAL, TEXT } from './config';
 
 export interface Hud {
   el: HTMLDivElement;
@@ -12,7 +12,8 @@ export interface Hud {
   announce(text: string): void;
   /** Big message over the container (overflow). Pass null to hide. */
   showToast(text: string | null): void;
-  showCompletion(onPlayAgain: () => void): void;
+  showCompletion(onPlayAgain: () => void, texts?: { title: string; line: string; button: string }): void;
+  setScore(score: number, best: number): void;
   hideCompletion(): void;
   /** Camera status chip text (null hides it). */
   setChip(text: string | null): void;
@@ -52,7 +53,14 @@ export function createHud(root: HTMLElement): Hud {
   // Ladder
   const lt = put(el, 'fm-display fm-ladder-title', TEXT.ladderTitle, ladder.title.x, ladder.title.y);
   lt.style.fontSize = `${ladder.title.size}px`;
+  if (ENDLESS) {
+    ladder.centers.forEach((c, i) => {
+      if (ladder.labelAnchor === 'below') put(el, 'fm-mono fm-center fm-small', TEXT.ladderLabels[i], c.x - 45, c.y + ladder.discR + 6, 90);
+      else put(el, 'fm-mono fm-small', TEXT.ladderLabels[i], c.x + ladder.discR + 8, c.y - 8, 130);
+    });
+  }
   [2, 3, 4].forEach((ci, k) => {
+    if (ENDLESS) return;
     const c = ladder.centers[ci];
     if (ladder.labelAnchor === 'below') {
       put(el, 'fm-mono fm-center fm-small', TEXT.slotLabels[k], c.x - 35, c.y + ladder.discR + 6, 70);
@@ -63,7 +71,15 @@ export function createHud(root: HTMLElement): Hud {
 
   // Project slots
   const slotGlyphs: HTMLDivElement[] = [];
-  slots.pos.forEach((p, i) => {
+  // Endless mode: score and best score take the place of the project slots
+  const sp = slots.pos[0];
+  put(el, 'fm-mono fm-small', TEXT.score, sp.x, sp.y - 6, 210);
+  const scoreVal = put(el, 'fm-display', '0', sp.x, sp.y + 14, 210);
+  scoreVal.style.fontSize = '58px';
+  put(el, 'fm-mono fm-small', TEXT.best, sp.x, sp.y + 86, 210);
+  const bestVal = put(el, 'fm-display', '0', sp.x, sp.y + 104, 210);
+  bestVal.style.fontSize = '34px';
+  (ENDLESS ? [] : slots.pos).forEach((p, i) => {
     const glyph = put(el, 'fm-display fm-center fm-slot-glyph', '?', p.x, p.y, slots.size, slots.size);
     glyph.style.fontSize = `${slots.glyphSize}px`;
     slotGlyphs.push(glyph);
@@ -221,7 +237,7 @@ export function createHud(root: HTMLElement): Hud {
       }, JUICE.hintFadeMs);
     },
     setSlot(index, unlocked) {
-      slotGlyphs[index].textContent = unlocked ? '' : '?';
+      if (slotGlyphs[index]) slotGlyphs[index].textContent = unlocked ? '' : '?';
     },
     announce(text) {
       sr.textContent = text;
@@ -230,10 +246,18 @@ export function createHud(root: HTMLElement): Hud {
       toast.textContent = text ?? '';
       toast.style.display = text ? 'block' : 'none';
     },
-    showCompletion(cb) {
+    setScore(score, best) {
+      scoreVal.textContent = String(score);
+      bestVal.textContent = String(best);
+    },
+    showCompletion(cb, texts) {
       onAgain = cb;
+      const t = texts ?? TEXT.completion;
+      title.textContent = t.title;
+      line.textContent = t.line;
+      btn.textContent = t.button;
       card.style.display = 'flex';
-      sr.textContent = `${TEXT.completion.title}. ${TEXT.completion.line}`;
+      sr.textContent = `${t.title}. ${t.line}`;
       btn.focus({ preventScroll: true });
     },
     hideCompletion() {

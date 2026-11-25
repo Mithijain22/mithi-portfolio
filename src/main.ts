@@ -25,7 +25,7 @@ const intro = skipIntro ? Promise.resolve() : (document.body.classList.add('lock
 intro.then(() => {
   try { sessionStorage.setItem('seen', '1'); } catch { /* ignore */ }
   document.body.classList.remove('locked');
-  showHero(); mountGame(); mountSections();
+  showHero(); mountSections(); mountGame();
   const target = pending || location.hash.slice(1);
   if (target) document.getElementById(target)?.scrollIntoView();
 });

@@ -19,14 +19,15 @@ ${leg(330, -1)}${leg(1590, 1)}
 <rect x="251" y="198" width="1418" height="744" rx="96" fill="${PINK}" stroke="${B}" stroke-width="6"/>
 <rect x="271" y="218" width="1378" height="716" rx="80" fill="${B}"/>
 <rect x="260" y="942" width="1400" height="62" rx="31" fill="${PINK}" stroke="${B}" stroke-width="5"/>
-<g font-family="'DM Mono',monospace" font-weight="700" fill="${B}"><text id="tv-ch" x="292" y="982" font-size="24">BIG MOUTH  CH.01</text><text id="tv-count" x="930" y="984" font-size="26">01 / 03</text></g>
+<g font-family="'DM Mono',monospace" font-weight="700" fill="${B}"><text id="tv-ch" x="292" y="982" font-size="24">TAKE A BREAK</text><text id="tv-count" x="930" y="984" font-size="26">SCORE 0</text></g>
 ${dots}${knob(1380)}${knob(1470)}<circle cx="1594" cy="975" r="22" fill="${OR}" stroke="${B}" stroke-width="5"/></svg>`;
 
 export function mountGame(): HTMLElement {
   const s = document.createElement('section');
   s.id = 'game'; s.className = 'game';
   s.innerHTML = `<div class="tv">${FRAME}<div class="tvscreen" id="tvscreen"></div></div>`;
-  document.getElementById('app')!.appendChild(s);
+  const foot = document.getElementById('links');          // the game sits between the work and the footer
+  if (foot) foot.before(s); else document.getElementById('app')!.appendChild(s);
   const screen = s.querySelector<HTMLElement>('#tvscreen')!;
   initGame(screen);
   // switch-on: a bright line opens into the picture the first time the TV scrolls into view

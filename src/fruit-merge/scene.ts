@@ -1,5 +1,5 @@
 // Static scene drawing (canvas). Text lives in the DOM HUD (hud.ts). All positions come from LAYOUT.
-import { LOGICAL, LAYOUT, FRUITS } from './config';
+import { LOGICAL, LAYOUT, FRUITS, ENDLESS } from './config';
 import { COLORS } from './tokens';
 import { drawFruit } from './art';
 
@@ -191,6 +191,6 @@ export function drawScene(ctx: CanvasRenderingContext2D, state: SceneState): voi
   drawDangerLine(ctx, state.dangerOpacity);
   ctx.restore();
   drawLadder(ctx, state.ladderPulse);
-  drawSlots(ctx, state.unlocked, state.slotScale);
+  if (!ENDLESS) drawSlots(ctx, state.unlocked, state.slotScale);
   drawNextBox(ctx, state.nextTier);
 }

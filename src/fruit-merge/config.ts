@@ -150,7 +150,11 @@ export const DISC_SHADOW_OFFSET = 3;       // px, down-right
 export const ICON_HEIGHT_FRACTION = 0.62;
 
 /** Milestones: tier -> project index (Section 5.6). */
-export const MILESTONES: Readonly<Record<number, 0 | 1 | 2>> = { 3: 0, 4: 1, 5: 2 };
+/** Endless mode: no project unlocks. A score, a best score, and a game over when the container overflows. */
+export const ENDLESS = true;
+/** Points for creating a fruit of each tier (index = tier). */
+export const SCORE_PER_TIER: readonly number[] = [0, 2, 4, 8, 16, 32];
+export const MILESTONES: Readonly<Record<number, 0 | 1 | 2>> = ENDLESS ? {} : { 3: 0, 4: 1, 5: 2 };
 
 export const PHYSICS = {
   gravityY: 1.1,
@@ -288,7 +292,13 @@ export const TEXT = {
     afterMerge: 'NICE! TWO BLUEBERRIES. MAKE THEM TOUCH.',
     afterMilestone: 'FRUITS MERGE UP. SEE WHAT YOU CAN MAKE.',
     showFinger: 'SHOW ME YOUR FINGER',
+    endless: 'KEEP MERGING. SEE HOW FAR YOU GET.',
   },
+  ladderLabels: FRUITS.map((f) => f.name),
+  score: 'SCORE',
+  best: 'BEST',
+  overflowEndless: 'TOO FULL!',
+  gameOver: { title: 'GAME OVER', line: (s: number, b: number) => `SCORE ${s} · BEST ${b}`, button: 'PLAY AGAIN' },
   overflow: 'TOO FULL! FRESH START.',
   completion: { title: 'ALL THREE UNLOCKED', line: 'SCROLL FOR THE REST', button: 'PLAY AGAIN' },
   cameraCard: {

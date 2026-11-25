@@ -1,7 +1,7 @@
 import { gsap } from 'gsap';
 import {
   LOGICAL, MAX_DPR, LAYOUT, FRUITS, DROP, MERGE, PHYSICS, RENDER, ASSIST, REVEAL, OVERFLOW,
-  SLOT_POP, T5_POP, MILESTONES, TEXT, CAMERA, INPUT, JUICE,
+  SLOT_POP, T5_POP, MILESTONES, TEXT, CAMERA, INPUT, JUICE, ENDLESS, SCORE_PER_TIER,
 } from './config';
 import { COLORS } from './tokens';
 import { drawScene, type SceneState } from './scene';
@@ -17,6 +17,8 @@ import './styles.css';
 export interface GameHost {
   onUnlock(index: 0 | 1 | 2): Promise<void> | void;
   onComplete(): void;
+  /** Endless mode: called whenever the score changes. */
+  onScore?(score: number, best: number): void;
   onProgress?(state: { unlocked: number; camera: 'off' | 'on' | 'denied' | 'error' }): void;
 }
 
@@ -60,6 +62,23 @@ export function createGame(root: HTMLElement, host: GameHost, options: GameOptio
   const ctx = canvas.getContext('2d')!;
   const hud = createHud(root);
   hud.setHint(TEXT.hints.drop1);
+
+  // Endless mode: score and best score (the best score is only a convenience, kept in the browser if allowed)
+  const BEST_KEY = 'mithi-merge-best';
+  let score = 0;
+  let best = 0;
+  try { best = Number(localStorage.getItem(BEST_KEY)) || 0; } catch { /* storage blocked: ignore */ }
+  let tierThreeHinted = false;
+  hud.setScore(0, best);
+  const addScore = (n: number): void => {
+    score += n;
+    if (score > best) {
+      best = score;
+      try { localStorage.setItem(BEST_KEY, String(best)); } catch { /* ignore */ }
+    }
+    hud.setScore(score, best);
+    host.onScore?.(score, best);
+  };
 
   // Hint text: the base hint, overridden by SHOW ME YOUR FINGER while the hand is lost
   let baseHint: string = TEXT.hints.drop1;
@@ -329,13 +348,19 @@ export function createGame(root: HTMLElement, host: GameHost, options: GameOptio
     if (!reducedMotion) shakeUntil = clock + OVERFLOW.shakeMs;
     world.clear(); // progress (unlocked slots) is kept
     queue.endOpening(); // no scripted opening again
-    hud.showToast(TEXT.overflow);
-    hud.announce(TEXT.overflow);
+    hud.showToast(ENDLESS ? TEXT.overflowEndless : TEXT.overflow);
+    hud.announce(ENDLESS ? TEXT.overflowEndless : TEXT.overflow);
     const tl = gsap.timeline({
       onComplete: () => {
         activeTl = null;
         if (destroyed) return;
         hud.showToast(null);
+        if (ENDLESS) {
+          mode = 'complete';
+          hud.showCompletion(restart, { title: TEXT.gameOver.title, line: TEXT.gameOver.line(score, best), button: TEXT.gameOver.button });
+          host.onComplete();
+          return;
+        }
         mode = 'play';
       },
     });
@@ -541,6 +566,10 @@ export function createGame(root: HTMLElement, host: GameHost, options: GameOptio
             if (f.tier >= 3) mergeShakeUntil = clock + JUICE.mergeShakeMs; // small shake on T3+ merges
           }
           tierSeen[f.tier] = true;
+          if (ENDLESS) {
+            addScore(SCORE_PER_TIER[f.tier] ?? 0);
+            if (f.tier === 3 && !tierThreeHinted) { tierThreeHinted = true; setHint(TEXT.hints.endless); hintClearAt = clock + 4000; }
+          }
           if (f.tier === 2 && dropCount >= 3 && !afterMergeShown && !seen[0]) {
             afterMergeShown = true;
             setHint(TEXT.hints.afterMerge);
@@ -675,6 +704,10 @@ export function createGame(root: HTMLElement, host: GameHost, options: GameOptio
     shakeUntil = 0;
     overTime = 0;
     seen[0] = seen[1] = seen[2] = false;
+    score = 0;
+    tierThreeHinted = false;
+    hud.setScore(0, best);
+    host.onScore?.(0, best);
     state.unlocked = [false, false, false];
     state.slotScale = [1, 1, 1];
     state.dangerOpacity = 1;
