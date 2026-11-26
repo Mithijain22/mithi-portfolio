@@ -117,3 +117,13 @@ html.chilli-on .tvscreen, html.chilli-on .tvscreen * { cursor: default !importan
 @media (max-width: 767px) { .tsteps { grid-template-columns: 1fr; } }
 
 .tlabel { font-family: var(--font-mono) !important; font-size: clamp(11px, 1.3vw, 18px) !important; letter-spacing: .12em; color: var(--orange-red); margin: 0 0 2px !important; }
+
+/* scrolling bands between the sections */
+.bands { position: relative; overflow: hidden; height: var(--h); background: var(--black); }
+.band { position: absolute; left: -10%; width: 120%; top: var(--top, 50%); transform: translateY(-50%) rotate(var(--rot)); background: var(--bg); color: var(--black); border-block: 4px solid var(--black); overflow: hidden; white-space: nowrap; }
+.btrack { display: inline-flex; animation: bandmove var(--dur) linear infinite; will-change: transform; }
+.btrack.rev { animation-direction: reverse; }
+.btrack .u { font-family: var(--font-display); font-size: clamp(40px, 7vw, 104px); line-height: 1.12; text-transform: uppercase; padding: 0 .35em; }
+.btrack .u i { font-family: system-ui, sans-serif; font-style: normal; margin-left: .35em; }
+@keyframes bandmove { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .btrack { animation: none; } }

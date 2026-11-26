@@ -87,7 +87,7 @@ PROJECTS.forEach((p, i) => {
   const sections = p.caseStudy.sections
     .map((s, j) => `<section class="cs-section"><h2>${esc(s.heading)}</h2>${rich(s.body)}${
       s.image ? art(s.image, CW[(i + j + 1) % CW.length], 'full') : ''
-    }</section>`)
+    }${(s.images ?? []).map((f) => `<figure class="cs-fig"><img src="${esc(f.src)}" alt="${esc(f.alt)}" loading="lazy" width="${f.w}" height="${f.h}"><figcaption>${esc(f.caption)}</figcaption></figure>`).join('')}</section>`)
     .join('\n');
   write(`work/${p.slug}/index.html`, render(tpl('case-study.html'), {
     ...shared(`/work/${p.slug}`, `${p.title} | ${NAME}`, p.summary),

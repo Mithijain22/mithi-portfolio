@@ -26,7 +26,7 @@ export function mountGame(): HTMLElement {
   const s = document.createElement('section');
   s.id = 'game'; s.className = 'game';
   s.innerHTML = `<div class="tv">${FRAME}<div class="tvscreen" id="tvscreen"></div></div>`;
-  const foot = document.getElementById('links');          // the game sits between the work and the footer
+  const foot = document.getElementById('bands-c') ?? document.getElementById('links');          // the game sits between the work and the footer
   if (foot) foot.before(s); else document.getElementById('app')!.appendChild(s);
   const screen = s.querySelector<HTMLElement>('#tvscreen')!;
   initGame(screen);

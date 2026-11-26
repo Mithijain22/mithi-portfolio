@@ -1,7 +1,8 @@
 // All personal content lives here. Nothing personal may be hard-coded anywhere else.
 // Section bodies: blank line = new paragraph; lines starting with "- " = bullet list; **bold** is supported.
 
-export interface CaseStudySection { heading: string; body: string; image?: string }
+export interface Figure { src: string; alt: string; caption: string; w: number; h: number }
+export interface CaseStudySection { heading: string; body: string; image?: string; images?: Figure[] }
 export interface Stat { value: string; label: string }
 export interface Project {
   index: string;
@@ -105,7 +106,7 @@ I built the screens from three approved reference pages and compared screenshots
     problem: `Why do 1-star reviews on Olist cluster around certain sellers and regions: logistics, product quality, seller service, or a mix?`,
     approach: `I stated three hypotheses before any modelling, tried a causal difference-in-differences design with pre-committed robustness checks, and classified the review text by complaint type.`,
     result: `Late delivery is the dominant correlate, but the causal test failed 2 of 3 checks and is reported as suggestive.`,
-    heroImage: '',
+    heroImage: '/img/causa/dashboard.webp',
     cardStat: { value: '5% → 55%', label: '1-star rate: fast vs slow delivery' },
     summary: `Root-cause analysis of 1-star reviews on a Brazilian e-commerce marketplace. A causal test that failed its own pre-committed checks, reported honestly.`,
     stats: [
@@ -113,7 +114,10 @@ I built the screens from three approved reference pages and compared screenshots
       { value: '5.0% → 55.2%', label: '1-star rate for 0–3 day vs 30+ day deliveries' },
       { value: '96,478', label: 'delivered orders analysed' },
     ],
-    links: [{ label: 'VIEW ON GITHUB', url: 'https://github.com/Mithijain22/Causa' }],
+    links: [
+      { label: 'LIVE DASHBOARD', url: 'https://public.tableau.com/app/profile/mithi.jain2162/viz/Book1_17862360490930/Dashboard1' },
+      { label: 'VIEW ON GITHUB', url: 'https://github.com/Mithijain22/Causa' },
+    ],
     repo: '',
     caseStudy: { sections: [
       { heading: 'THE QUESTION', body: `Why do 1-star reviews cluster around certain sellers and regions on Olist, a Brazilian e-commerce marketplace? Is it a logistics problem, a product problem, a seller-service problem, or some mix? And can any of it be shown causally, not just as correlation?
@@ -128,7 +132,10 @@ Product-quality issues are a real but secondary driver, at about 20.9% of coded 
 
 Seller identity also matters on its own. Among sellers with 100+ orders, holding delivery speed roughly constant, 1-star rates still range from 0% to 52.6%.
 
-The causal attempt did not hold up. It failed 2 of 3 pre-committed robustness checks and is explicitly downgraded from causal to suggestive. I treat that as a real finding, not a failure.` },
+The causal attempt did not hold up. It failed 2 of 3 pre-committed robustness checks and is explicitly downgraded from causal to suggestive. I treat that as a real finding, not a failure.`, images: [
+        { src: '/img/causa/a.webp', alt: `Bar chart of the 1-star rate by delivery time. It rises from 4.99% for 0 to 3 day deliveries to 55.23% for 30 or more days.`, caption: `Exhibit A: delivery time against 1-star rate`, w: 490, h: 758 },
+        { src: '/img/causa/c.webp', alt: `Bar chart of complaint categories in 1-star reviews: late delivery 2,766, wrong or incomplete item 774, damaged or defective 490, not as described 245, seller unresponsive 94.`, caption: `Exhibit C: complaint categories in 1-star reviews`, w: 450, h: 280 },
+      ] },
       { heading: 'METHOD', body: `- **Track A, causal:** difference-in-differences using a graded treatment intensity (a state's average delivery time before the window, as a proxy for distance from the São Paulo fulfilment hub), interacted with a November 2017 to March 2018 window. Checked with two placebo tests and two alternate specifications.
 - **Track B, correlational:** keyword and phrase classification applied directly to the Portuguese text of 1-star reviews, manually validated against sampled reviews over two rounds.
 - **Naive baseline:** descriptive cuts by delivery-time bucket, lateness against the estimate, region and seller, used as the "this alone isn't proof" comparison throughout.` },
@@ -136,7 +143,9 @@ The causal attempt did not hold up. It failed 2 of 3 pre-committed robustness ch
 
 **The graded design, and its failure.** I switched to a continuous "peripherality" intensity variable with state and month fixed effects. The headline coefficient came back significant (p = 0.023). But a stop-loss rule written down before running anything required two checks. The placebo test, a fake window with no known shock, came back significant when it should have been null. Dropping São Paulo flipped the sign of the effect and killed its significance. Following the rule, I downgraded the estimate to suggestive instead of re-specifying until something passed.
 
-**A method substitution, made explicit.** The plan was machine translation before topic modelling. Standing up that infrastructure was not a good use of time for this scope, so I built a Portuguese keyword lexicon and applied it to the original text. Round one of validation found a real gap in "wrong or incomplete item" phrasing, which I fixed and re-validated in round two. Final coverage: 56.1% of 1-star reviews with text matched at least one category.` },
+**A method substitution, made explicit.** The plan was machine translation before topic modelling. Standing up that infrastructure was not a good use of time for this scope, so I built a Portuguese keyword lexicon and applied it to the original text. Round one of validation found a real gap in "wrong or incomplete item" phrasing, which I fixed and re-validated in round two. Final coverage: 56.1% of 1-star reviews with text matched at least one category.`, images: [
+        { src: '/img/causa/b.webp', alt: `Line chart of average delivery days and 1-star rate by purchase month. Both peak together between November 2017 and March 2018.`, caption: `Exhibit B: delivery days and 1-star rate by month, with the shared peak in the November 2017 to March 2018 window`, w: 970, h: 758 },
+      ] },
       { heading: 'HONEST LIMITATIONS', body: `- **The causal claim for H1 is not established.** The estimate is suggestive at best. The likely reason it failed is a platform-wide improvement trend confounded with the seasonal window.
 - **43.9% of 1-star reviews with text matched no category,** a mix of short, vague reviews and long-tail phrasing a keyword approach can't cover without overfitting.
 - **Seller-unresponsive complaints are almost certainly undercounted** by text matching (explicit mentions are only 1.3%). The seller-level spread, from 0% to 52.6% within matched delivery-time buckets, is the more trustworthy signal for H3.
@@ -151,7 +160,11 @@ I propose a seller-randomised A/B test with a power calculation for three possib
 - Complaint categories
 - 1-star rate by region
 - A seller scatter of delivery speed against complaint rate, showing the wide vertical spread behind H3
-- A sortable seller docket` },
+- A sortable seller docket`, images: [
+        { src: '/img/causa/d.webp', alt: `Bar chart of the 1-star rate by customer state, highest in MA at about 16% and lowest in AP.`, caption: `Exhibit D: 1-star rate by region`, w: 1170, h: 758 },
+        { src: '/img/causa/e.webp', alt: `Scatter plot of sellers by average delivery days and 1-star rate, showing a wide vertical spread at any delivery speed.`, caption: `Exhibit E: seller scatter. At any given delivery speed, 1-star rates vary widely, which is the evidence for H3.`, w: 740, h: 758 },
+        { src: '/img/causa/f.webp', alt: `Table of sellers listing state, seller ID, 1-star rate, average delivery days and order count.`, caption: `Exhibit F: the sortable seller docket`, w: 530, h: 758 },
+      ] },
       { heading: 'WHAT IS NEXT', body: `- Run the seller-randomised A/B test to get a real causal read on the delivery SLA.
 - Use an event-study design across all 25 months to separate the platform-wide trend from any seasonal effect.
 - Revisit the text classification with proper translation, to see whether topic modelling beats the 56.1% coverage of the keyword lexicon.` },

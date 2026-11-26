@@ -1,4 +1,5 @@
 import { PROJECTS, LINKS } from '../content.ts';
+import { bandsCross, bandsSingle, bandsParallel } from './bands.ts';
 
 // Work section: three colour panels (teal, yellow, hot pink), then the footer with links.
 const BG = ['#12B5C4', '#F5D90A', '#EE3E9C'];
@@ -22,5 +23,6 @@ export function mountSections() {
     <a href="${LINKS.github}" target="_blank" rel="noopener"><b>GITHUB</b><span>github.com/Mithijain22</span></a>
     <a href="mailto:${LINKS.email}"><b>EMAIL</b><span>${LINKS.email}</span></a></div>
     <a class="fplay" href="#game">PLAY AGAIN</a>`;
-  app.append(work, foot);
+  // hero, bands, work, bands, [game goes here], bands, footer
+  app.append(bandsCross(), work, bandsSingle(), bandsParallel(), foot);
 }
