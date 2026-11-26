@@ -205,3 +205,7 @@ body.site { animation: pagein .3s steps(5); }
 .cs-fig { margin: 28px 0 8px; max-width: 1100px; }
 .cs-fig img { display: block; max-width: 100%; max-height: 640px; width: auto; height: auto; background: #fff; border: 3px solid var(--cream); box-shadow: 8px 8px 0 var(--orange-red); }
 .cs-fig figcaption { margin-top: 16px; font-family: var(--font-mono); font-size: 13px; text-transform: uppercase; max-width: 70ch; }
+
+/* a chart shown whole on a white panel */
+.art.contain { background: #fff; aspect-ratio: auto; }
+.art.contain img { height: auto; object-fit: contain; }

@@ -1,27 +1,28 @@
-// Scrolling bands of "IDEAS MERGE, PRODUCTS SHIP" between the sections. Each set is arranged differently.
-const UNIT = 'IDEAS MERGE, PRODUCTS SHIP';
-const COLORS = { cream: '#FCE3D5', pink: '#EE3E9C', teal: '#12B5C4', yellow: '#F5D90A' };
-const track = () => `<span class="u">${UNIT}<i>&#10022;</i></span>`.repeat(6);
+// Scrolling bands between the sections. Every set is an X (two bands crossing), but each set differs:
+// colours, tilt, speed, where they cross, and the words on them.
+const MERGE = 'IDEAS MERGE, PRODUCTS SHIP';
+const C = { cream: '#FCE3D5', pink: '#EE3E9C', teal: '#12B5C4', yellow: '#F5D90A' };
+const track = (text: string) => `<span class="u">${text}<i>&#10022;</i></span>`.repeat(6);
 
-interface Band { bg: string; rot: number; dur: number; rev?: boolean; top?: number }
+interface Band { bg: string; rot: number; dur: number; text: string; rev?: boolean }
 
-function make(id: string, height: string, bands: Band[]): HTMLElement {
+function make(id: string, cross: number, bands: Band[]): HTMLElement {
   const el = document.createElement('div');
   el.id = id; el.className = 'bands'; el.setAttribute('aria-hidden', 'true');
-  el.style.setProperty('--h', height);
-  el.innerHTML = bands.map((b) => `<div class="band" style="--bg:${b.bg};--rot:${b.rot}deg;--dur:${b.dur}s;--top:${b.top ?? 50}%"><div class="btrack${b.rev ? ' rev' : ''}">${track()}</div></div>`).join('');
+  const ox = (cross + 10) / 1.2; // the bands are 120% wide, so turn this crossing point (in % of the screen) into the band's own %
+  el.innerHTML = bands.map((b) => `<div class="band" style="--bg:${b.bg};--rot:${b.rot}deg;--dur:${b.dur}s;--ox:${ox}%"><div class="btrack${b.rev ? ' rev' : ''}">${track(b.text)}</div></div>`).join('');
   return el;
 }
 
-// A: two bands crossing in an X (after the hero)
-export const bandsCross = () => make('bands-a', 'clamp(240px, 30vw, 460px)', [
-  { bg: COLORS.cream, rot: -3.2, dur: 50 }, { bg: COLORS.pink, rot: 3.2, dur: 62, rev: true },
+// after the hero: cream and pink cross in the middle
+export const bandsCross = () => make('bands-a', 50, [
+  { bg: C.cream, rot: -3.2, dur: 52, text: MERGE }, { bg: C.pink, rot: 3.2, dur: 64, text: MERGE, rev: true },
 ]);
-// B: one single band, gently tilted (after the work)
-export const bandsSingle = () => make('bands-b', 'clamp(130px, 16vw, 260px)', [
-  { bg: COLORS.teal, rot: 1.4, dur: 55 },
+// before the game: teal and yellow cross on the left, steeper, with an invitation to play
+export const bandsSingle = () => make('bands-b', 27, [
+  { bg: C.teal, rot: 2.6, dur: 48, text: "ARE YOU BORED? HERE'S A GAME" }, { bg: C.yellow, rot: -3.8, dur: 58, text: 'WANNA STAY AND PLAY A GAME?', rev: true },
 ]);
-// C: two parallel bands moving in opposite directions (after the game)
-export const bandsParallel = () => make('bands-c', 'clamp(240px, 28vw, 420px)', [
-  { bg: COLORS.yellow, rot: -1.2, dur: 58, top: 34 }, { bg: COLORS.cream, rot: -1.2, dur: 70, rev: true, top: 68 },
+// after the game: yellow and pink cross on the right, shallow
+export const bandsParallel = () => make('bands-c', 74, [
+  { bg: C.yellow, rot: -2.2, dur: 60, text: MERGE, rev: true }, { bg: C.pink, rot: 4.2, dur: 54, text: MERGE },
 ]);

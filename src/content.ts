@@ -16,7 +16,8 @@ export interface Project {
   problem: string;
   approach: string;
   result: string;
-  heroImage: string;          // card + case study picture; '' = use cardStat (or halftone dots)
+  heroFit?: 'cover' | 'contain'; // contain = show a chart whole on a white panel
+  heroImage: string;          // case study picture; the card uses cardStat if there is one; '' = use cardStat (or halftone dots)
   cardStat?: Stat;            // big number shown on the card when there is no picture
   summary: string;            // short text on the work card
   stats: Stat[];              // three big numbers on the case study page
@@ -182,7 +183,8 @@ I propose a seller-randomised A/B test with a power calculation for three possib
     problem: `Forecast error is a proxy metric. Nobody orders stock to minimise RMSE; they order to avoid stockouts and overstock.`,
     approach: `I built a point forecast, a full predictive distribution two ways, and a newsvendor ordering layer on top, then scored both decisions against held-out demand.`,
     result: `The distribution saved 7.81% in inventory cost, positive in every backtest window, department and store.`,
-    heroImage: '',
+    heroImage: '/img/delphi/savings.webp',
+    heroFit: 'contain',
     cardStat: { value: '$38.7K', label: 'saved vs a point forecast' },
     summary: `Does a full predictive distribution pay for itself in a real inventory decision? A newsvendor test on Walmart M5 demand, scored in dollars.`,
     stats: [
@@ -205,7 +207,9 @@ The compromise was compute. The full dataset has about 30,490 series, and this s
 
 The saving is not a fluke of aggregation. It is positive in every window (5.7% to 11.0%), in both departments (7.7% and 8.4%) and in every store (6.5% to 8.9%).
 
-That number is only trustworthy if the distribution is calibrated, so I checked calibration before computing the dollars, not after. Split conformal prediction hit its 90% coverage target almost exactly in every window and had the narrowest intervals of the three methods. Raw quantile LightGBM and conformalised quantile regression both over-covered at around 95 to 96%.` },
+That number is only trustworthy if the distribution is calibrated, so I checked calibration before computing the dollars, not after. Split conformal prediction hit its 90% coverage target almost exactly in every window and had the narrowest intervals of the three methods. Raw quantile LightGBM and conformalised quantile regression both over-covered at around 95 to 96%.`, images: [
+        { src: '/img/delphi/calibration.webp', alt: `Two charts. Left: coverage of the 90% interval across six backtest windows; split conformal stays near 90% while raw quantile LightGBM and conformalised quantile regression sit at about 95 to 97%. Right: pooled calibration of the quantile model, which looks off at low quantiles because of zero-inflated demand.`, caption: `Calibration: split conformal hits the 90% target. The pooled quantile plot looks off at low quantiles because 75.7% of test sales are exactly zero.`, w: 1950, h: 750 },
+      ] },
       { heading: 'HOW THE RESULT WAS REACHED', body: `- **Panel construction:** melt the wide sales table to long form, join the calendar (with each row's state-specific SNAP flag) and the weekly prices.
 - **Baselines:** a seasonal-naive strawman (MAE 0.89) against a Poisson-objective LightGBM with lags, rolling statistics, SNAP, price-change signals and calendar events (MAE 0.76). I flagged this metric as a sanity check, not the finding.
 - **Rolling-origin backtest:** 6 walk-forward windows, each with a 28-day held-out horizon. To avoid circularity, features are lag-shifted by a fixed 28 days, and the code asserts that training ends before testing begins. A separate 28-day calibration slice, never used to fit the model, is what the conformal adjustments are calibrated on.

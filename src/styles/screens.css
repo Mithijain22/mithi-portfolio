@@ -15,26 +15,26 @@ html { scroll-behavior: smooth; } body.locked { overflow: hidden; }
 .lcount b { font-weight: 400; font-size: clamp(56px, 8vw, 120px); line-height: 1; min-width: 2ch; text-align: right; }
 .gl { position: absolute; background: var(--cream); opacity: 0; }
 
-.hero { position: relative; height: 100vh; height: 100svh; overflow: hidden; background: var(--black); color: var(--cream); }
+.hero { position: relative; height: 138vh; height: 138svh; overflow: hidden; background: var(--black); color: var(--cream); }
 .hnav { position: absolute; inset: 0 0 auto 0; display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; z-index: 5; font-family: var(--font-display); font-size: 20px; letter-spacing: .04em; }
 .hnav .grp { display: flex; gap: 28px; } .hnav .grp.r { margin-right: 180px; }
 .hnav a { text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; border-bottom: 2px solid transparent; }
 .hnav a:hover { border-color: var(--orange-red); }
 .hmark { position: absolute; left: 50%; transform: translateX(-50%); font-size: 26px; }
-.hname { position: absolute; left: 0; right: 0; top: 54%; transform: translateY(-50%); margin: 0; display: flex; justify-content: center; font-family: var(--font-display); font-weight: 400; font-size: min(37vw, 62vh); line-height: .9; letter-spacing: -.01em; }
-.hname > span { display: flex; gap: .09em; }
+.hname { position: absolute; left: 0; right: 0; top: 54vh; top: 54svh; transform: translateY(-50%); margin: 0; display: flex; justify-content: center; font-family: var(--font-display); font-weight: 400; font-size: min(54vw, 97vh); font-size: min(54vw, 97svh); line-height: .9; letter-spacing: -.01em; }
+.hname > span { display: flex; gap: .018em; }
 .letter { display: inline-block; transform: scaleY(1.15); color: var(--cream); background-size: cover; background-position: 50% 30%; -webkit-background-clip: text; background-clip: text; user-select: none; }
 .letter:hover, .letter.on { color: transparent; background-image: var(--img); }
 .hrows { position: absolute; left: 0; right: 0; bottom: 96px; display: flex; justify-content: space-around; font-family: var(--font-display); font-size: clamp(14px, 1.6vw, 26px); opacity: .7; }
 .htag { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); margin: 0; text-align: center; font-size: 16px; }
-.hint { position: absolute; right: 28px; bottom: 36px; margin: 0; font-family: var(--font-mono); font-size: 12px; }
+.hint { position: absolute; left: 28px; top: 104px; margin: 0; font-family: var(--font-mono); font-size: 12px; }
 .tube { position: absolute; left: 24px; bottom: 20px; width: clamp(150px, 17vw, 250px); background: none; border: 0; padding: 0; z-index: 5; }
 .tube svg { width: 100%; height: auto; display: block; }
 .tube:hover svg, .tube:focus-visible svg { animation: wobble .5s; }
 @keyframes wobble { 25% { transform: rotate(-4deg); } 50% { transform: rotate(3deg); } 75% { transform: rotate(-2deg); } }
 @media (max-width: 767px) {
   .hnav .grp { gap: 12px; font-size: 16px; } .hnav .grp.r { margin-right: 0; } .hmark { display: none; }
-  .hname { font-size: 35vw; top: 50%; } .htag { bottom: 120px; width: 80%; } .hint { bottom: 80px; right: 50%; transform: translateX(50%); }
+  .hero { height: 100vh; height: 100svh; } .hname { top: 42%; } .htag { bottom: 120px; width: 80%; } .hint { top: 70px; left: 50%; transform: translateX(-50%); white-space: nowrap; }
   .tube { bottom: 12px; width: 150px; } .skip { top: 64px; }
 }
 @media (prefers-reduced-motion: reduce) { .tube:hover svg { animation: none; } }
@@ -119,11 +119,12 @@ html.chilli-on .tvscreen, html.chilli-on .tvscreen * { cursor: default !importan
 .tlabel { font-family: var(--font-mono) !important; font-size: clamp(11px, 1.3vw, 18px) !important; letter-spacing: .12em; color: var(--orange-red); margin: 0 0 2px !important; }
 
 /* scrolling bands between the sections */
-.bands { position: relative; overflow: hidden; height: var(--h); background: var(--black); }
-.band { position: absolute; left: -10%; width: 120%; top: var(--top, 50%); transform: translateY(-50%) rotate(var(--rot)); background: var(--bg); color: var(--black); border-block: 4px solid var(--black); overflow: hidden; white-space: nowrap; }
+.bands { position: relative; overflow: hidden; height: clamp(170px, 19vw, 330px); background: var(--black); }
+.band { position: absolute; left: -10%; width: 120%; top: 50%; transform: translateY(-50%) rotate(var(--rot)); transform-origin: var(--ox, 50%) 50%; background: var(--bg); color: var(--black); border-block: 4px solid var(--black); overflow: hidden; white-space: nowrap; }
+.band:nth-child(2) { z-index: 1; }
 .btrack { display: inline-flex; animation: bandmove var(--dur) linear infinite; will-change: transform; }
 .btrack.rev { animation-direction: reverse; }
-.btrack .u { font-family: var(--font-display); font-size: clamp(40px, 7vw, 104px); line-height: 1.12; text-transform: uppercase; padding: 0 .35em; }
+.btrack .u { font-family: var(--font-display); font-size: clamp(30px, 4.6vw, 76px); line-height: 1.12; text-transform: uppercase; padding: 0 .35em; }
 .btrack .u i { font-family: system-ui, sans-serif; font-style: normal; margin-left: .35em; }
 @keyframes bandmove { to { transform: translateX(-50%); } }
 @media (prefers-reduced-motion: reduce) { .btrack { animation: none; } }

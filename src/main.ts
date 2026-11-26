@@ -27,5 +27,10 @@ intro.then(() => {
   document.body.classList.remove('locked');
   showHero(); mountSections(); mountGame();
   const target = pending || location.hash.slice(1);
-  if (target) document.getElementById(target)?.scrollIntoView();
+  if (target) {
+    const go = () => document.getElementById(target)?.scrollIntoView({ behavior: 'instant' as ScrollBehavior });
+    go();
+    document.fonts?.ready.then(go);
+    addEventListener('load', go, { once: true });
+  }
 });
