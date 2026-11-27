@@ -28,6 +28,33 @@ export function showHero() {
     l.addEventListener('click', () => { l.classList.toggle('on'); hero.querySelector('.hint')?.remove(); }); // touch
     l.addEventListener('mouseenter', () => hero.querySelector('.hint')?.remove());
   });
+  // Make the word wider (up to 86% of the screen) by stretching it sideways, and counter-scale the pictures
+  // inside the letters so the faces are not squashed.
+  const nameEl = hero.querySelector<HTMLElement>('.hname')!;
+  const span = nameEl.querySelector<HTMLElement>(':scope > span')!;
+  const letterEls = [...hero.querySelectorAll<HTMLElement>('.letter')];
+  const dims: ([number, number] | null)[] = HERO_IMAGES.map(() => null);
+  const SY = 1.15; // vertical stretch of each letter (see CSS)
+  const fit = () => {
+    const w0 = span.offsetWidth; // layout width, not changed by the stretch
+    const sx = w0 ? Math.min(1.4, Math.max(1, (0.86 * innerWidth) / w0)) : 1;
+    nameEl.style.setProperty('--sx', String(sx));
+    letterEls.forEach((l, i) => {
+      const d = dims[i];
+      if (!d) return;
+      const s = Math.max((l.offsetWidth * sx) / d[0], (l.offsetHeight * SY) / d[1]);
+      l.style.backgroundSize = `${(s * d[0]) / sx}px ${(s * d[1]) / SY}px`;
+    });
+  };
+  HERO_IMAGES.forEach((src, i) => {
+    const im = new Image();
+    im.onload = () => { dims[i] = [im.naturalWidth, im.naturalHeight]; fit(); };
+    im.src = src;
+  });
+  addEventListener('resize', fit);
+  document.fonts?.ready.then(fit);
+  fit();
+
   hero.querySelectorAll('[data-play]').forEach((b) => b.addEventListener('click', (e) => {
     e.preventDefault(); document.getElementById('game')?.scrollIntoView({ behavior: 'smooth' });
   }));
